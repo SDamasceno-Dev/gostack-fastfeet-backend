@@ -1,8 +1,8 @@
 /* 
  *  app.js will include the App Structure
  */
-const express = require('express');
-const routes = require('./routes');
+import express, { json } from 'express';
+import routes from './routes';
 class App {
   constructor() {
     this.server = express();
@@ -11,7 +11,7 @@ class App {
   }
 
   middlewares() {  // List all Middlewares used in App
-    this.server.use(express.json()); // Use JSON in all Req and Res
+    this.server.use(json()); // Use JSON in all Req and Res
   }
 
   routes() {  // List all routes used on App
@@ -19,4 +19,4 @@ class App {
   }
 }
 
-module.exports = new App().server;
+export default new App().server;
