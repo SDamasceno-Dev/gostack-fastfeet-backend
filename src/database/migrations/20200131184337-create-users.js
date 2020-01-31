@@ -27,7 +27,7 @@ module.exports = {
       // Allows to define an administrator user.
       administrator: {
         type: Sequelize.BOOLEAN,
-        defaultValues: false,
+        defaultValue: false,
         allowNull: false
       },
       // Records the creation time
