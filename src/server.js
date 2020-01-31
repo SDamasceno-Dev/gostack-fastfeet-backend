@@ -1,5 +1,5 @@
-/*  
- *  server.JS will include all configuration 
+/*
+ *  server.JS will include all configuration
  *  about the API Server of the Application
  */
 import app from './app';
