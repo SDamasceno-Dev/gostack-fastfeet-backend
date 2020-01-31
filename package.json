@@ -1,0 +1,11 @@
+{
+  "name": "fastfeet",
+  "version": "1.0.0",
+  "main": "./src/app.js",
+  "repository": "https://github.com/SDamasceno-Dev/rocketseat-bootcamp-gostack10-fastfeet.git",
+  "author": "sdamasceno-dev <sdamasceno.dev@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
