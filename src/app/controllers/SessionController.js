@@ -1,23 +1,34 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/User';
+import * as Yup from 'yup';
+import Admin from '../models/Admin';
 import authConfig from '../../config/auth';
 
 class SessionController {
   async store(req, res) {
+    const schema = Yup.object().shape({
+      email: Yup.string()
+        .email()
+        .required(),
+      password: Yup.string().required()
+    });
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Session failed!' });
+    }
+
     const { email, password } = req.body;
-    const user = await User.findOne({ where: { email } });
+    const admin = await Admin.findOne({ where: { email } });
     // Check if email is in database
-    if (!user) {
+    if (!admin) {
       return res.status(401).json({ error: 'User not found in database!' });
     }
     // Check if password is correct
-    if (!(await user.checkPassword(password))) {
+    if (!(await admin.checkPassword(password))) {
       return res.status(401).json({ error: 'The password is incorrect!' });
     }
-    // Return the user authenticated
-    const { id, name } = user;
+    // Return the admin authenticated
+    const { id, name } = admin;
     return res.json({
-      user: {
+      admin: {
         id,
         name,
         email
