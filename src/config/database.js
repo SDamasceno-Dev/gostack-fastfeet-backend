@@ -5,9 +5,9 @@ module.exports = {
   host: 'localhost',
   dialect: 'postgres',
   dialectOptions: {
-    useUTC: false // For reading from database
+    useUTC: false // for reading from database
   },
-  timezone: '-03:00', // For writing to database
+  timezone: '-03:00', // for writing to database
   define: {
     timestamps: true,
     underscored: true,

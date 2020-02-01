@@ -1,8 +1,9 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/database';
 import Admin from '../app/models/Admin';
+import Recipe from '../app/models/Recipient';
 
-const models = [Admin];
+const models = [Admin, Recipe];
 
 class Database {
   constructor() {

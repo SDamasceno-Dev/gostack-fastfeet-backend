@@ -28,11 +28,9 @@ class SessionController {
     // Return the admin authenticated
     const { id, name } = admin;
     return res.json({
-      admin: {
-        id,
-        name,
-        email
-      },
+      id,
+      name,
+      email,
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn
       })

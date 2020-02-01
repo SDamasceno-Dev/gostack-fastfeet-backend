@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('recipient', {
+    return queryInterface.createTable('recipients', {
       // Id Client.
       id: {
         type: Sequelize.INTEGER,
@@ -14,45 +14,40 @@ module.exports = {
         allowNull: false
       },
       // STREET Client.
-      rua: {
+      street: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
       },
       // PLACE NUMBER Client.
-      numero: {
+      number: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
       },
       // COMPLEMENT Client.
-      complemento: {
+      complement: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
       },
       // CITY Client.
-      cidade: {
+      city: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
       },
       // STATE Client.
-      estado: {
+      state: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
       },
       // ZIP CODE Client.
-      cep: {
+      zipcode: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
-      },
-      // PASSWORD_HASH Store encrypted password.
-      password_hash: {
-        type: Sequelize.STRING,
-        allowNull: false
       },
       // Records the creation time
       created_at: {
@@ -68,6 +63,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('recipient');
+    return queryInterface.dropTable('recipients');
   }
 };

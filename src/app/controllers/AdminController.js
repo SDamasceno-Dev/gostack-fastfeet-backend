@@ -25,13 +25,12 @@ class AdminController {
         .status(400)
         .json({ error: 'This email already exists in database.' });
     }
-    const { id, name, email, administrator } = await Admin.create(req.body);
+    const { id, name, email } = await Admin.create(req.body);
 
     return res.json({
       id,
       name,
-      email,
-      administrator
+      email
     });
   }
 
@@ -50,7 +49,7 @@ class AdminController {
       )
     });
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Login unsuccessful!' });
+      return res.status(400).json({ error: 'Password does not match!' });
     }
 
     const { email, oldPassword } = req.body;
@@ -72,13 +71,12 @@ class AdminController {
       return res.status(401).json({ error: 'Old Password is incorrect!' });
     }
 
-    const { id, name, administrator } = await admin.update(req.body);
+    const { id, name } = await admin.update(req.body);
 
     return res.json({
       id,
       name,
-      email,
-      administrator
+      email
     });
   }
 }

@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('admins', {
       // Id User.
       id: {
         type: Sequelize.INTEGER,
@@ -24,12 +24,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      // Allows to define an administrator user.
-      administrator: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-        allowNull: false
-      },
       // Records the creation time
       created_at: {
         type: Sequelize.DATE,
@@ -44,6 +38,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('admins');
   }
 };

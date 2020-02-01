@@ -8,16 +8,15 @@ class Admin extends Model {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
-        password_hash: Sequelize.STRING,
-        administrator: Sequelize.BOOLEAN
+        password_hash: Sequelize.STRING
       },
       {
         sequelize
       }
     );
-    this.addHook('beforeSave', async user => {
-      if (user.password) {
-        user.password_hash = await bcrypt.hash(user.password, 8);
+    this.addHook('beforeSave', async admin => {
+      if (admin.password) {
+        admin.password_hash = await bcrypt.hash(admin.password, 8);
       }
     });
     return this;
