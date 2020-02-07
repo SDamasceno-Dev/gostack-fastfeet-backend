@@ -1,5 +1,5 @@
 /**
- * @description: Model file of Courier entity
+ * @description: Model file of Courier entity.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 
