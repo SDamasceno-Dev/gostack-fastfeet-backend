@@ -1,3 +1,9 @@
+/**
+ * @description: File that connects to the Postgres database and loads all
+ * models of the App
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ */
+
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/database';
 import Admin from '../app/models/Admin';

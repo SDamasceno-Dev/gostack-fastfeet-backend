@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import Recip from '../models/Recipient';
+import Admin from '../models/Admin';
 
 class RecipController {
   async store(req, res) {
@@ -25,6 +26,7 @@ class RecipController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
+      id: Yup.number(),
       name: Yup.string(),
       street: Yup.string(),
       number: Yup.string(),
@@ -35,12 +37,40 @@ class RecipController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Recipient not updated!' });
+      return res.status(400).json({
+        error: 'Recipient not updated! Check the information provided.'
+      });
     }
 
-    const recipient = await Recip.update(req.body);
+    // Checks whether the logged in user is Admin
+    const admin = await Admin.findByPk(req.adminId);
+    if (!admin) {
+      return res.json({
+        message: 'You must be an Admin to update a Recipient data!'
+      });
+    }
 
-    return res.json(recipient);
+    const { id } = req.body;
+    const recipient = await Recip.findByPk(id);
+    const {
+      name,
+      street,
+      number,
+      complement,
+      city,
+      state,
+      zipcode
+    } = await recipient.update(req.body);
+    return res.json({
+      id,
+      name,
+      street,
+      number,
+      complement,
+      city,
+      state,
+      zipcode
+    });
   }
 }
 

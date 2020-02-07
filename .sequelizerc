@@ -1,8 +1,17 @@
+/**
+ * @description: Exports the path of folders and files for use with sequelize
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ */
+
 const { resolve } = require('path');
 
 module.exports = {
+  // Path to the Database configuration file
   'config': resolve(__dirname, 'src', 'config', 'database.js'),
+  // Path to the Models folder
   'models-path': resolve(__dirname, 'src', 'app', 'models'),
+  // Path to the Migration path
   'migrations-path': resolve(__dirname, 'src', 'database', 'migrations'),
+  // Path to the Seeds path
   'seeders-path': resolve(__dirname, 'src', 'database', 'seeds'),
 };

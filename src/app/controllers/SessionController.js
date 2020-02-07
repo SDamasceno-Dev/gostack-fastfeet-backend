@@ -1,3 +1,9 @@
+/**
+ * @description: Controller that allows the creation of valid conections
+ * (sessions) with database.
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ */
+
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
 import Admin from '../models/Admin';

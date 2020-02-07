@@ -1,6 +1,8 @@
-/*
- *  app.js will include the App Structure
+/**
+ * @description: Includes the configuration of the Express server.
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
+
 import express, { json } from 'express';
 import routes from './routes';
 
@@ -13,14 +15,14 @@ class App {
     this.routes();
   }
 
+  // Use JSON in all Req and Res
   middlewares() {
-    // List all Middlewares used in App
-    this.server.use(json()); // Use JSON in all Req and Res
+    this.server.use(json());
   }
 
+  // Use all routes as middlewares on App
   routes() {
-    // List all routes used on App
-    this.server.use(routes); // Routes as middlewares
+    this.server.use(routes);
   }
 }
 

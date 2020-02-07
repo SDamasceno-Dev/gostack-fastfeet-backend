@@ -1,4 +1,10 @@
-import * as Yup from 'yup';
+/**
+ * @description: Controller that allows the creation, update of Admin records
+ * in the Database
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ */
+
+import * as Yup from 'yup'; // Schema validator
 import Admin from '../models/Admin';
 
 class AdminController {
