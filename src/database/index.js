@@ -8,8 +8,9 @@ import Sequelize from 'sequelize';
 import databaseConfig from '../config/database';
 import Admin from '../app/models/Admin';
 import Recipe from '../app/models/Recipient';
+import File from '../app/models/File';
 
-const models = [Admin, Recipe];
+const models = [Admin, Recipe, File];
 
 class Database {
   constructor() {
