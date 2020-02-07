@@ -8,7 +8,7 @@ import multer from 'multer';
 import multerConfig from './config/multer';
 import AdminController from './app/controllers/AdminController';
 import SessionController from './app/controllers/SessionController';
-import RecipController from './app/controllers/RecipController';
+import RecipientController from './app/controllers/RecipientController';
 import CourierController from './app/controllers/CourierController';
 import FileController from './app/controllers/FileController';
 
@@ -21,16 +21,17 @@ const upload = multer(multerConfig);
 routes.post('/admin', AdminController.store);
 
 // Session routes
-routes.post('/sessions', SessionController.store);
+routes.post('/session', SessionController.store);
 
 // Middleware session validator
 routes.use(authMiddleware);
 
 // Validated Admin routes
 routes.put('/admin', AdminController.update);
+routes.post('/courier', CourierController.store);
 routes.put('/courier', CourierController.update);
-routes.post('/recipient', RecipController.store);
-routes.put('/recipient', RecipController.update);
+routes.post('/recipient', RecipientController.store);
+routes.put('/recipient', RecipientController.update);
 routes.post('/files', upload.single('file'), FileController.store);
 
 export default routes;

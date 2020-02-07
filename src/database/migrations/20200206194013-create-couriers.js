@@ -19,14 +19,6 @@ module.exports = {
         allowNull: false,
         unique: true
       },
-      // AVATAR Courier.
-      avatar_id: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        unique: false,
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
-      },
       // Records the creation time
       created_at: {
         type: Sequelize.DATE,

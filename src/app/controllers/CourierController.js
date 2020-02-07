@@ -21,6 +21,13 @@ class CourierController {
       });
     }
 
+    const courierExists = await Courier.findOne({
+      where: { email: req.body.email }
+    });
+    if (courierExists) {
+      return res.status(400).json({ erro: 'Courier email already exists!' });
+    }
+
     const courier = await Courier.create(req.body);
 
     return res.json(courier);
@@ -30,18 +37,27 @@ class CourierController {
     const schema = Yup.object().shape({
       id: Yup.number(),
       name: Yup.string(),
-      street: Yup.string(),
-      number: Yup.string(),
-      complement: Yup.string(),
-      city: Yup.string(),
-      state: Yup.string().max(2),
-      zipcode: Yup.string()
+      email: Yup.string().email(),
+      avatar_id: Yup.number()
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({
-        error: 'Recipient not updated! Check the information provided.'
+        error: 'Courier not updated! Check the information provided.'
       });
+    }
+
+    const { id, email } = req.body;
+    const courier = await Courier.findByPk(id);
+
+    if (email && email !== courier.email) {
+      const courierExists = await Courier.findOne({ where: { email } });
+
+      if (courierExists) {
+        return res
+          .status(400)
+          .json({ erro: 'This email is already registered!' });
+      }
     }
 
     /**
@@ -49,26 +65,10 @@ class CourierController {
      * have the guarantee that it is an authenticated user and necessarily
      * an Admin.
      */
-    const { id } = req.body;
-    const recipient = await Recip.findByPk(id);
-    const {
-      name,
-      street,
-      number,
-      complement,
-      city,
-      state,
-      zipcode
-    } = await recipient.update(req.body);
+    const { name } = await courier.update(req.body);
     return res.json({
-      id,
       name,
-      street,
-      number,
-      complement,
-      city,
-      state,
-      zipcode
+      email
     });
   }
 }

@@ -16,10 +16,6 @@ class File extends Model {
         sequelize
       }
     );
-    /**
-     * Code snippets that are executed automatically based on actions that
-     * occur in the model
-     */
 
     return this;
   }

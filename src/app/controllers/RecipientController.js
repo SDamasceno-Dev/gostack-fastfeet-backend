@@ -5,7 +5,7 @@
  */
 
 import * as Yup from 'yup';
-import Recip from '../models/Recipient';
+import Recipient from '../models/Recipient';
 
 class RecipController {
   async store(req, res) {
@@ -24,7 +24,7 @@ class RecipController {
       return res.status(400).json({ error: 'Recipient does not created!' });
     }
 
-    const recipient = await Recip.create(req.body);
+    const recipient = await Recipient.create(req.body);
 
     return res.json(recipient);
   }
@@ -53,7 +53,7 @@ class RecipController {
      * an Admin.
      */
     const { id } = req.body;
-    const recipient = await Recip.findByPk(id);
+    const recipient = await Recipient.findByPk(id);
     const {
       name,
       street,

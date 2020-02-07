@@ -5,12 +5,14 @@
  */
 
 import Sequelize from 'sequelize';
-import databaseConfig from '../config/database';
 import Admin from '../app/models/Admin';
-import Recipe from '../app/models/Recipient';
+import Recipient from '../app/models/Recipient';
+import Courier from '../app/models/Courier';
 import File from '../app/models/File';
 
-const models = [Admin, Recipe, File];
+import databaseConfig from '../config/database';
+
+const models = [Admin, Recipient, Courier, File];
 
 class Database {
   constructor() {
@@ -19,7 +21,9 @@ class Database {
 
   init() {
     this.connection = new Sequelize(databaseConfig);
-    models.map(model => model.init(this.connection));
+    models
+      .map(model => model.init(this.connection))
+      .map(model => model.associate && model.associate(this.connection.models));
   }
 }
 
