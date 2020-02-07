@@ -42,14 +42,11 @@ class RecipController {
       });
     }
 
-    // Checks whether the logged in user is Admin
-    const admin = await Admin.findByPk(req.adminId);
-    if (!admin) {
-      return res.json({
-        message: 'You must be an Admin to update a Recipient data!'
-      });
-    }
-
+    /**
+     * As the middleware is on the route defined before the update method,
+     * have the guarantee that it is an authenticated user and necessarily
+     * an Admin.
+     */
     const { id } = req.body;
     const recipient = await Recip.findByPk(id);
     const {
