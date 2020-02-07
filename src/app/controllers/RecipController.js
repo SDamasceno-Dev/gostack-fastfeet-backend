@@ -1,6 +1,11 @@
+/**
+ * @description: Controller that allows the creation, update of Recipients
+ *  records in the Database
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ */
+
 import * as Yup from 'yup';
 import Recip from '../models/Recipient';
-import Admin from '../models/Admin';
 
 class RecipController {
   async store(req, res) {

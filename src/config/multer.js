@@ -1,6 +1,9 @@
 /**
- *  File with all the configuration for uploading files to be used in the App.
+ * @description: File with all the configuration for uploading files to be used
+ * in the App.
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
+
 import multer from 'multer'; // Allow upload files
 import crypto from 'crypto'; //
 import { extname, resolve } from 'path'; //
