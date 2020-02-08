@@ -33,14 +33,23 @@ class RecipController {
     return res.json(recipient);
   }
 
-  // List all Recipients
+  // List all Recipients (Index)
   async index(req, res) {
-    return res.json();
+    const recipients = await Recipient.findAll();
+    return res.json(recipients);
   }
 
-  // List One Recipient
+  // List One Recipient (Show)
   async show(req, res) {
-    return res.json();
+    /*     const { name, street, number, complement, city, state, zipcode } = req.body;
+    const recipient = await Recipient.findAll({
+      where: { name, street, number, complement, city, state, zipcode }
+    });
+ */
+    const { name } = req.body;
+    const recipient = await Recipient.findOne({ where: { name } });
+
+    return res.json(recipient);
   }
 
   // Update a Recipient

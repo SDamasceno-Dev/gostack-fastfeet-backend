@@ -29,9 +29,12 @@ routes.use(authMiddleware);
 // Validated Admin routes
 routes.put('/admin', AdminController.update);
 
+routes.get('/courier', CourierController.index);
 routes.post('/courier', CourierController.store);
 routes.put('/courier', CourierController.update);
+routes.delete('/courier', CourierController.delete);
 
+routes.get('/recipient', RecipientController.index);
 routes.post('/recipient', RecipientController.store);
 routes.put('/recipient', RecipientController.update);
 routes.delete('/recipient', RecipientController.delete);

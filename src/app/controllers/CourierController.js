@@ -6,8 +6,10 @@
 
 import * as Yup from 'yup';
 import Courier from '../models/Courier';
+import File from '../models/File';
 
 class CourierController {
+  // Record a Courier (Store)
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -33,6 +35,7 @@ class CourierController {
     return res.json(courier);
   }
 
+  // Update a Courier (Update)
   async update(req, res) {
     const schema = Yup.object().shape({
       id: Yup.number(),
@@ -70,6 +73,27 @@ class CourierController {
       name,
       email
     });
+  }
+
+  // List all Recipients (Index)
+  async index(req, res) {
+    const courier = await Courier.findAll();
+    return res.json(courier);
+  }
+
+  // Delete a Courier (Delete)
+  async delete(req, res) {
+    const { id } = req.body;
+    const courier = await Courier.findByPk(id);
+    const file = await File.findByPk(courier.avatar_id);
+
+    if (!courier) {
+      return res.status(401).json({ error: 'This courier does not exists!' });
+    }
+
+    await courier.destroy();
+    await file.destroy();
+    return res.json({ message: `${courier.name} was deleted!` });
   }
 }
 
