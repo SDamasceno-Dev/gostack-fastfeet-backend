@@ -28,7 +28,7 @@ class Admin extends Model {
         admin.password_hash = await bcrypt.hash(admin.password, 8);
       }
     });
-    return this;
+    return this; // Return the model that has just been initialized.
   }
 
   checkPassword(password) {

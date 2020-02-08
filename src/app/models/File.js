@@ -17,7 +17,7 @@ class File extends Model {
       }
     );
 
-    return this;
+    return this; // Return the model that has just been initialized.
   }
 }
 

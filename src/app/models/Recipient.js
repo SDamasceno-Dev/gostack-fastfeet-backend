@@ -21,7 +21,7 @@ class Recipient extends Model {
         sequelize
       }
     );
-    return this;
+    return this; // Return the model that has just been initialized.
   }
 }
 

@@ -28,10 +28,14 @@ routes.use(authMiddleware);
 
 // Validated Admin routes
 routes.put('/admin', AdminController.update);
+
 routes.post('/courier', CourierController.store);
 routes.put('/courier', CourierController.update);
+
 routes.post('/recipient', RecipientController.store);
 routes.put('/recipient', RecipientController.update);
+routes.delete('/recipient', RecipientController.delete);
+
 routes.post('/files', upload.single('file'), FileController.store);
 
 export default routes;

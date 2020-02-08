@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import Recipient from '../models/Recipient';
 
 class RecipController {
+  // Store a Recipient
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -21,7 +22,10 @@ class RecipController {
       zipcode: Yup.string().required()
     });
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Recipient does not created!' });
+      return res.status(400).json({
+        error:
+          'Recipient does not created! Check the information and try again.'
+      });
     }
 
     const recipient = await Recipient.create(req.body);
@@ -29,6 +33,17 @@ class RecipController {
     return res.json(recipient);
   }
 
+  // List all Recipients
+  async index(req, res) {
+    return res.json();
+  }
+
+  // List One Recipient
+  async show(req, res) {
+    return res.json();
+  }
+
+  // Update a Recipient
   async update(req, res) {
     const schema = Yup.object().shape({
       id: Yup.number(),
@@ -73,6 +88,19 @@ class RecipController {
       state,
       zipcode
     });
+  }
+
+  // Delete a Recipient
+  async delete(req, res) {
+    const { id } = req.body;
+    const recipient = await Recipient.findByPk(id);
+
+    if (!recipient) {
+      return res.status(401).json({ error: 'This recipient does not exists!' });
+    }
+
+    await recipient.destroy();
+    return res.json({ message: `${recipient.name} was deleted!` });
   }
 }
 

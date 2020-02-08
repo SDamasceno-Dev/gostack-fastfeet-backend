@@ -16,7 +16,7 @@ class Courier extends Model {
         sequelize
       }
     );
-    return this;
+    return this; // Return the model that has just been initialized.
   }
 
   static associate(models) {
