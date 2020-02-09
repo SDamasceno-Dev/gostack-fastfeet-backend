@@ -9,10 +9,11 @@ import Admin from '../app/models/Admin';
 import Recipient from '../app/models/Recipient';
 import Courier from '../app/models/Courier';
 import File from '../app/models/File';
+import Delivery from '../app/models/Delivery';
 
 import databaseConfig from '../config/database';
 
-const models = [Admin, Recipient, Courier, File];
+const models = [Admin, Recipient, Courier, File, Delivery];
 
 class Database {
   constructor() {
