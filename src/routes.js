@@ -55,6 +55,7 @@ routes.post('/delivery', DeliveryController.store);
 routes.put('/delivery', DeliveryController.update);
 routes.delete('/delivery', DeliveryController.delete);
 
+//
 routes.put('/deliveryStatus', DeliveryStatusController.update);
 
 export default routes;

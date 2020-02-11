@@ -5,6 +5,7 @@
  */
 
 import Sequelize from 'sequelize';
+
 import Admin from '../app/models/Admin';
 import Recipient from '../app/models/Recipient';
 import Courier from '../app/models/Courier';

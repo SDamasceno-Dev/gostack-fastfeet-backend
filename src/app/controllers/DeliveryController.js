@@ -9,6 +9,8 @@ import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Courier from '../models/Courier';
 
+import Mail from '../../lib/Mail';
+
 class DeliveryController {
   // Register a Delivery onde the database
   async store(req, res) {
@@ -29,12 +31,12 @@ class DeliveryController {
     }
 
     const { recipient_id, courier_id } = req.body;
+    const courier = await Courier.findByPk(courier_id);
+    const recipient = await Recipient.findByPk(recipient_id);
 
     // Verify existence of the recipient to be registered in the delivery
     if (recipient_id) {
-      const recipientExist = await Recipient.findByPk(recipient_id);
-
-      if (!recipientExist) {
+      if (!recipient) {
         return res.status(401).json({
           erro:
             'This Recipient is not registered to be inserted in the delivery!'
@@ -44,9 +46,7 @@ class DeliveryController {
 
     // Verify existence of the courier to be updated in the delivery
     if (courier_id) {
-      const courierExist = await Courier.findByPk(courier_id);
-
-      if (!courierExist) {
+      if (!courier) {
         return res.status(401).json({
           erro: 'This Courier is not registered to be inserted in the delivery!'
         });
@@ -54,6 +54,12 @@ class DeliveryController {
     }
 
     const delivery = await Delivery.create(req.body);
+
+    await Mail.sendMail({
+      to: `${courier.name} <${courier.email}>`,
+      subject: 'Nova entrega cadastrada!',
+      text: 'Você tem uma nova entrega registrada em seu perfil!'
+    });
 
     return res.json(delivery);
   }
@@ -113,9 +119,9 @@ class DeliveryController {
 
     // Verify existence of the recipient to be updated in the delivery
     if (recipient_id) {
-      const recipientExist = await Recipient.findByPk(recipient_id);
+      const recipient = await Recipient.findByPk(recipient_id);
 
-      if (recipientExist === null) {
+      if (recipient === null) {
         return res.status(401).json({
           erro:
             'This Recipient is not registered to be inserted in the delivery!'
@@ -125,9 +131,9 @@ class DeliveryController {
 
     // Verify existence of the courier to be updated in the delivery
     if (courier_id) {
-      const courierExist = await Courier.findByPk(courier_id);
+      const courier = await Courier.findByPk(courier_id);
 
-      if (courierExist === null) {
+      if (courier === null) {
         return res.status(401).json({
           erro: 'This Courier is not registered to be inserted in the delivery!'
         });
