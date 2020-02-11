@@ -1,6 +1,6 @@
 /**
- * @description: Controller that allows the CRUD (Creation, Read, Update and
- *  Delete) of Deliveries records in the Database
+ * @description: Controller that allows CRUD (Creation, Read, Update and
+ * Delete) of the records of the DELIVERY entity in the database.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 
@@ -8,7 +8,6 @@ import * as Yup from 'yup';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Courier from '../models/Courier';
-import File from '../models/File';
 
 class DeliveryController {
   // Register a Delivery onde the database
@@ -27,6 +26,31 @@ class DeliveryController {
         error:
           'Delivery was not created! Check if PRODUCT, RECIPIENT and COURIER information was entered.'
       });
+    }
+
+    const { recipient_id, courier_id } = req.body;
+
+    // Verify existence of the recipient to be registered in the delivery
+    if (recipient_id) {
+      const recipientExist = await Recipient.findByPk(recipient_id);
+
+      if (!recipientExist) {
+        return res.status(401).json({
+          erro:
+            'This Recipient is not registered to be inserted in the delivery!'
+        });
+      }
+    }
+
+    // Verify existence of the courier to be updated in the delivery
+    if (courier_id) {
+      const courierExist = await Courier.findByPk(courier_id);
+
+      if (!courierExist) {
+        return res.status(401).json({
+          erro: 'This Courier is not registered to be inserted in the delivery!'
+        });
+      }
     }
 
     const delivery = await Delivery.create(req.body);
@@ -69,11 +93,7 @@ class DeliveryController {
       id: Yup.number().required(),
       product: Yup.string(),
       recipient_id: Yup.number(),
-      courier_id: Yup.number(),
-      signature_id: Yup.number(),
-      canceled_at: Yup.date(),
-      start_date: Yup.date(),
-      end_date: Yup.date()
+      courier_id: Yup.number()
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -82,12 +102,12 @@ class DeliveryController {
       });
     }
 
-    const { id, recipient_id, courier_id, signature_id } = req.body;
+    const { id, recipient_id, courier_id } = req.body;
 
     // Verify existence of the delivery to update
-    const deliveryExist = await Delivery.findByPk(id);
+    const delivery = await Delivery.findByPk(id);
 
-    if (!deliveryExist) {
+    if (!delivery) {
       return res.status(401).json({ erro: 'This delivery does not exists!' });
     }
 
@@ -95,7 +115,7 @@ class DeliveryController {
     if (recipient_id) {
       const recipientExist = await Recipient.findByPk(recipient_id);
 
-      if (!recipientExist) {
+      if (recipientExist === null) {
         return res.status(401).json({
           erro:
             'This Recipient is not registered to be inserted in the delivery!'
@@ -107,21 +127,9 @@ class DeliveryController {
     if (courier_id) {
       const courierExist = await Courier.findByPk(courier_id);
 
-      if (!courierExist) {
+      if (courierExist === null) {
         return res.status(401).json({
           erro: 'This Courier is not registered to be inserted in the delivery!'
-        });
-      }
-    }
-
-    // Verify existence of the signature to be updated in the delivery
-    if (signature_id) {
-      const signatureExist = await File.findByPk(signature_id);
-
-      if (!signatureExist) {
-        return res.status(401).json({
-          erro:
-            'This Signature was not captured. Please verify your information and try again!'
         });
       }
     }
@@ -131,7 +139,7 @@ class DeliveryController {
      * have the guarantee that it is an authenticated user and necessarily
      * an Admin.
      */
-    await Delivery.update(req.body);
+
     return res.json({ message: `The delivery nº ${id} was updated` });
   }
 }

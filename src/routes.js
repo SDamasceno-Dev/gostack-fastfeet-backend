@@ -12,6 +12,7 @@ import RecipientController from './app/controllers/RecipientController';
 import CourierController from './app/controllers/CourierController';
 import FileController from './app/controllers/FileController';
 import DeliveryController from './app/controllers/DeliveryController';
+import DeliveryStatusController from './app/controllers/DeliveryStatusController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -27,14 +28,20 @@ routes.post('/session', SessionController.store);
 // Middleware session validator
 routes.use(authMiddleware);
 
-// Validated Admin routes
+/**
+ * Validated Admin routes
+ */
+
+// Admin update
 routes.put('/admin', AdminController.update);
 
-routes.post('/courier', CourierController.store);
+// Couriers Entity Routes
 routes.get('/courier', CourierController.index);
+routes.post('/courier', CourierController.store);
 routes.put('/courier', CourierController.update);
 routes.delete('/courier', CourierController.delete);
 
+// Recipient Entity Routes
 routes.post('/recipient', RecipientController.store);
 routes.get('/recipient', RecipientController.index);
 routes.put('/recipient', RecipientController.update);
@@ -42,9 +49,12 @@ routes.delete('/recipient', RecipientController.delete);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
+// Delivery Entity Routes
 routes.get('/delivery', DeliveryController.index);
 routes.post('/delivery', DeliveryController.store);
 routes.put('/delivery', DeliveryController.update);
 routes.delete('/delivery', DeliveryController.delete);
+
+routes.put('/deliveryStatus', DeliveryStatusController.update);
 
 export default routes;
