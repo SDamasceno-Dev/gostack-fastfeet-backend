@@ -9,19 +9,16 @@ import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Courier from '../models/Courier';
 
-import Mail from '../../lib/Mail';
+import DeliveryMail from '../jobs/DeliveryMail';
+import Queue from '../../lib/Queue';
 
 class DeliveryController {
-  // Register a Delivery onde the database
+  // Register a Delivery on the database
   async store(req, res) {
     const schema = Yup.object().shape({
       product: Yup.string().required(),
       recipient_id: Yup.number().required(),
-      courier_id: Yup.number().required(),
-      signature_id: Yup.number(),
-      canceled_at: Yup.date(),
-      start_date: Yup.date(),
-      end_date: Yup.date()
+      courier_id: Yup.number().required()
     });
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({
@@ -55,19 +52,10 @@ class DeliveryController {
 
     const delivery = await Delivery.create(req.body);
 
-    await Mail.sendMail({
-      to: `${courier.name} <${courier.email}>`,
-      subject: 'Nova entrega cadastrada!',
-      template: 'deliveryNotification',
-      context: {
-        courierName: courier.name,
-        deliveryProduct: delivery.product,
-        recipientName: recipient.name,
-        recipientAddress: `${recipient.street}, ${recipient.number} ${recipient.complement}`,
-        recipientCity: recipient.city,
-        recipientState: recipient.state,
-        recipientZip: recipient.zipcode
-      }
+    await Queue.add(DeliveryMail.key, {
+      courier,
+      delivery,
+      recipient
     });
 
     return res.json(delivery);

@@ -6,13 +6,17 @@
 import { Router } from 'express';
 import multer from 'multer';
 import multerConfig from './config/multer';
+
 import AdminController from './app/controllers/AdminController';
 import SessionController from './app/controllers/SessionController';
 import RecipientController from './app/controllers/RecipientController';
 import CourierController from './app/controllers/CourierController';
 import FileController from './app/controllers/FileController';
 import DeliveryController from './app/controllers/DeliveryController';
-import DeliveryStatusController from './app/controllers/DeliveryStatusController';
+import DeliveryStartController from './app/controllers/DeliveryStartController';
+import DeliveryEndController from './app/controllers/DeliveryEndController';
+import DeliveriesController from './app/controllers/DeliveriesController';
+import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -25,8 +29,20 @@ routes.post('/admin', AdminController.store);
 // Session routes
 routes.post('/session', SessionController.store);
 
+// Courier Routes
+routes.put('/courier/deliveries', DeliveryStartController.update);
+routes.post(
+  '/courier/deliveries',
+  upload.single('file'),
+  DeliveryEndController.update
+);
+routes.get('/courier/:id/deliveries', DeliveriesController.index);
+
+// Delivery Problems Routes
+routes.post('/delivery/:delivery_id/problems', DeliveryProblemController.index);
+
 // Middleware session validator
-routes.use(authMiddleware);
+// routes.use(authMiddleware);
 
 /**
  * Validated Admin routes
@@ -35,7 +51,7 @@ routes.use(authMiddleware);
 // Admin update
 routes.put('/admin', AdminController.update);
 
-// Couriers Entity Routes
+// Courier Entity Routes
 routes.get('/courier', CourierController.index);
 routes.post('/courier', CourierController.store);
 routes.put('/courier', CourierController.update);
@@ -54,8 +70,5 @@ routes.get('/delivery', DeliveryController.index);
 routes.post('/delivery', DeliveryController.store);
 routes.put('/delivery', DeliveryController.update);
 routes.delete('/delivery', DeliveryController.delete);
-
-//
-routes.put('/deliveryStatus', DeliveryStatusController.update);
 
 export default routes;

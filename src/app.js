@@ -3,7 +3,8 @@
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 
-import express, { json } from 'express';
+import express from 'express';
+import path from 'path';
 import routes from './routes';
 
 import './database';
@@ -17,7 +18,11 @@ class App {
 
   // Use JSON in all Req and Res
   middlewares() {
-    this.server.use(json());
+    this.server.use(express.json());
+    this.server.use(
+      '/files',
+      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+    );
   }
 
   // Use all routes as middlewares on App
