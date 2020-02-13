@@ -1,16 +1,15 @@
 /**
- * @description: Model file of Courier entity.
+ * @description: Model file of Delivery_Problem entity.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 
 import Sequelize, { Model } from 'sequelize';
 
-class Courier extends Model {
+class DeliveryProblem extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: Sequelize.STRING,
-        email: Sequelize.STRING
+        description: Sequelize.STRING
       },
       {
         sequelize
@@ -19,10 +18,12 @@ class Courier extends Model {
     return this; // Return the model that has just been initialized.
   }
 
-  // Associate the table Courier with table File (sequelize)
   static associate(models) {
-    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
+    this.belongsTo(models.Delivery, {
+      foreignKey: 'delivery_id',
+      as: 'delivery'
+    });
   }
 }
 
-export default Courier;
+export default DeliveryProblem;

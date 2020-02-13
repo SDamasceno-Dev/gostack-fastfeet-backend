@@ -8,7 +8,9 @@ import * as Yup from 'yup';
 import Recipient from '../models/Recipient';
 
 class RecipController {
-  // Store a Recipient
+  /**
+   * Store a Recipient
+   */
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -33,26 +35,21 @@ class RecipController {
     return res.json(recipient);
   }
 
-  // List all Recipients (Index)
+  /**
+   * List all Recipients (Index)
+   */
   async index(req, res) {
-    const recipients = await Recipient.findAll();
+    const { page = 1 } = req.query;
+    const recipients = await Recipient.findAll({
+      limit: 20,
+      offset: (page - 1) * 20
+    });
     return res.json(recipients);
   }
 
-  // List One Recipient (Show)
-  async show(req, res) {
-    /*     const { name, street, number, complement, city, state, zipcode } = req.body;
-    const recipient = await Recipient.findAll({
-      where: { name, street, number, complement, city, state, zipcode }
-    });
- */
-    const { name } = req.body;
-    const recipient = await Recipient.findOne({ where: { name } });
-
-    return res.json(recipient);
-  }
-
-  // Update a Recipient
+  /**
+   * Update a Recipient
+   */
   async update(req, res) {
     const schema = Yup.object().shape({
       id: Yup.number(),
@@ -99,11 +96,14 @@ class RecipController {
     });
   }
 
-  // Delete a Recipient
+  /**
+   * Delete a Recipient
+   */
   async delete(req, res) {
     const { id } = req.body;
     const recipient = await Recipient.findByPk(id);
 
+    // Verify if recipient exists.
     if (!recipient) {
       return res.status(401).json({ error: 'This recipient does not exists!' });
     }

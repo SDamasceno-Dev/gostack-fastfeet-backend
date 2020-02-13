@@ -13,7 +13,8 @@ class Delivery extends Model {
         withdrawal: Sequelize.VIRTUAL,
         delivered: Sequelize.VIRTUAL,
         start_date: Sequelize.DATE,
-        end_date: Sequelize.DATE
+        end_date: Sequelize.DATE,
+        canceled_at: Sequelize.DATE
       },
       {
         sequelize
@@ -34,6 +35,10 @@ class Delivery extends Model {
     this.belongsTo(models.File, {
       foreignKey: 'signature_id',
       as: 'signature'
+    });
+    this.hasMany(models.DeliveryProblem, {
+      foreignKey: 'delivery_id',
+      as: 'deliveryproblem'
     });
   }
 }

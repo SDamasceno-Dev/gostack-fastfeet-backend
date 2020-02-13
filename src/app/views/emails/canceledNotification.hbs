@@ -1,0 +1,14 @@
+<strong>Olá {{ courierName }} </strong>
+<p>A entrega do produto <strong>{{ deliveryProduct }}</strong> foi cancelada.<br /> Por favor, desconsidere efetuar essa entrega. Confira mais informações da entrega cancelada abaixo:</p>
+<ul>
+  <li><strong>Destinatário:</strong> {{ recipientName }} </li>
+  <li><strong>Endereço:</strong> {{ recipientAddress }} </li>
+  <li><strong>Cidade:</strong> {{ recipientCity }} </li>
+  <li><strong>Estado:</strong> {{ recipientState }} </li>
+  <li><strong>CEP:</strong> {{ recipientZip }} </li>
+</ul>
+
+<p><strong>Motivo do cancelamento:</strong> {{deliveryProblemDescription}} </p>
+<br />
+<small>Caso exista alguma dúvida ou consideração a fazer sobre essa mensagem, por favor entre em contato com a administração da FastFeet</small>
+<br />

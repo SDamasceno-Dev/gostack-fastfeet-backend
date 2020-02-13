@@ -39,14 +39,12 @@ routes.post(
 routes.get('/courier/:id/deliveries', DeliveriesController.index);
 
 // Delivery Problems Routes
-routes.post('/delivery/:delivery_id/problems', DeliveryProblemController.index);
+routes.post('/delivery/:deliveryid/problems', DeliveryProblemController.store);
 
 // Middleware session validator
-// routes.use(authMiddleware);
+routes.use(authMiddleware);
 
-/**
- * Validated Admin routes
- */
+/** * Validated Admin routes ** */
 
 // Admin update
 routes.put('/admin', AdminController.update);
@@ -70,5 +68,13 @@ routes.get('/delivery', DeliveryController.index);
 routes.post('/delivery', DeliveryController.store);
 routes.put('/delivery', DeliveryController.update);
 routes.delete('/delivery', DeliveryController.delete);
+
+// Delivery With Problem Routes
+routes.get('/delivery/:deliveryid/problems', DeliveryProblemController.index);
+routes.get('/delivery/problems', DeliveryProblemController.show);
+routes.delete(
+  '/problem/:deliveryproblemid/cancel-delivery',
+  DeliveryProblemController.delete
+);
 
 export default routes;

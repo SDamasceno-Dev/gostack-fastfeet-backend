@@ -9,7 +9,9 @@ import Courier from '../models/Courier';
 import File from '../models/File';
 
 class CourierController {
-  // Record a Courier (Store)
+  /**
+   * Record a Courier (Store)
+   */
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -23,6 +25,7 @@ class CourierController {
       });
     }
 
+    // Check if courier already exists.
     const courierExists = await Courier.findOne({
       where: { email: req.body.email }
     });
@@ -30,12 +33,22 @@ class CourierController {
       return res.status(400).json({ erro: 'Courier email already exists!' });
     }
 
+    // Confirms if the avatar file is on the server and the id is correct.
+    const avatar = await File.findByPk(req.body.avatar_id);
+    if (avatar === null) {
+      return res
+        .status(401)
+        .json({ error: 'Please, upload your avatar first!' });
+    }
+
     const courier = await Courier.create(req.body);
 
     return res.json(courier);
   }
 
-  // Update a Courier (Update)
+  /**
+   * Update a Courier (Update)
+   */
   async update(req, res) {
     const schema = Yup.object().shape({
       id: Yup.number(),
@@ -43,7 +56,6 @@ class CourierController {
       email: Yup.string().email(),
       avatar_id: Yup.number()
     });
-
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({
         error: 'Courier not updated! Check the information provided.'
@@ -53,6 +65,12 @@ class CourierController {
     const { id, email } = req.body;
     const courier = await Courier.findByPk(id);
 
+    // Verify if courier exists
+    if (courier === null) {
+      return res.status(401).json({ error: 'This courier does not exists!' });
+    }
+
+    // Verify if already exists a courier with this email registered.
     if (email && email !== courier.email) {
       const courierExists = await Courier.findOne({ where: { email } });
 
@@ -75,18 +93,27 @@ class CourierController {
     });
   }
 
-  // List all Recipients (Index)
+  /**
+   * List all Recipients (Index)
+   */
   async index(req, res) {
-    const courier = await Courier.findAll();
+    const { page = 1 } = req.query;
+    const courier = await Courier.findAll({
+      limit: 20,
+      offset: (page - 1) * 20
+    });
     return res.json(courier);
   }
 
-  // Delete a Courier (Delete)
+  /**
+   * Delete a Courier (Delete)
+   */
   async delete(req, res) {
     const { id } = req.body;
     const courier = await Courier.findByPk(id);
     const file = await File.findByPk(courier.avatar_id);
 
+    // Check if courier exists
     if (!courier) {
       return res.status(401).json({ error: 'This courier does not exists!' });
     }
