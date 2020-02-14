@@ -1,5 +1,5 @@
 /**
- * @description: Controller that allows the creation, update of Admin records
+ * @description: Controller that allows the CRUD of Admin records
  * in the Database
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
@@ -8,6 +8,9 @@ import * as Yup from 'yup'; // Schema validator
 import Admin from '../models/Admin';
 
 class AdminController {
+  /**
+   * Create a Admin record
+   */
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -22,6 +25,7 @@ class AdminController {
       return res.status(400).json({ error: 'Admin does not created!' });
     }
 
+    // Check for an administrator login with this email.
     const adminExists = await Admin.findOne({
       where: { email: req.body.email }
     });
@@ -40,6 +44,21 @@ class AdminController {
     });
   }
 
+  /**
+   * List all Admin profiles
+   */
+  async index(req, res) {
+    const { page = 1 } = req.query;
+    const admin = await Admin.findAll({
+      limit: 20,
+      offset: (page - 1) * 20
+    });
+    return res.json(admin);
+  }
+
+  /**
+   * Update Admin profile.
+   */
   async update(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string(),
@@ -61,6 +80,7 @@ class AdminController {
     const { email, oldPassword } = req.body;
     const admin = await Admin.findByPk(req.adminId);
 
+    // Verify another admin with this email
     if (email && email !== admin.email) {
       const adminExists = await Admin.findOne({
         where: { email }

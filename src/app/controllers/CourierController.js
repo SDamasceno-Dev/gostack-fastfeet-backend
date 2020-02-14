@@ -7,6 +7,7 @@
 import * as Yup from 'yup';
 import Courier from '../models/Courier';
 import File from '../models/File';
+import Delivery from '../models/Delivery';
 
 class CourierController {
   /**
@@ -112,10 +113,22 @@ class CourierController {
     const { id } = req.body;
     const courier = await Courier.findByPk(id);
     const file = await File.findByPk(courier.avatar_id);
+    const delivery = await Delivery.findOne({
+      where: {
+        courier_id: courier.id
+      }
+    });
 
     // Check if courier exists
     if (!courier) {
       return res.status(401).json({ error: 'This courier does not exists!' });
+    }
+
+    // Check if courier has delivery assigned
+    if (delivery) {
+      return res.status(400).json({
+        error: 'This courier has an assigned delivery, then cannot be deleted.'
+      });
     }
 
     await courier.destroy();

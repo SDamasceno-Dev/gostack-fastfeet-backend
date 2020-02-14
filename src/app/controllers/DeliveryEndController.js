@@ -3,6 +3,8 @@
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 
+import { isBefore, parseISO } from 'date-fns';
+
 import File from '../models/File';
 import Delivery from '../models/Delivery';
 
@@ -29,6 +31,14 @@ class DeliveryEndController {
       name,
       path
     });
+
+    // Verify if end_date is after start_date
+    if (isBefore(parseISO(end_date), delivery.start_date)) {
+      return res.status(401).json({
+        error:
+          'The delivery time is before the pick-up time for delivery. Please check the time provided.'
+      });
+    }
 
     // Finish the delivery
     await delivery.update({ end_date, signature_id });

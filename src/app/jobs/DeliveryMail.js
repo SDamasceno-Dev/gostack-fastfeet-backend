@@ -1,3 +1,8 @@
+/**
+ * @description: Background job for new registered delivery.
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ */
+
 import Mail from '../../lib/Mail';
 
 class DeliveryMail {

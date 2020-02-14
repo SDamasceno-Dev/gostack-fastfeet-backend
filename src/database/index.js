@@ -1,6 +1,6 @@
 /**
- * @description: File that connects to the Postgres database and loads all
- * models of the App
+ * @description: File that loads all models of the App and realize all
+ * associations between tables.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 

@@ -1,5 +1,5 @@
 /**
- * @description: Model file of Admin entity
+ * @description: Model file of File entity.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 

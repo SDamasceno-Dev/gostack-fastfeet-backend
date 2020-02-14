@@ -13,7 +13,9 @@ import DeliveryMail from '../jobs/DeliveryMail';
 import Queue from '../../lib/Queue';
 
 class DeliveryController {
-  // Register a Delivery on the database
+  /**
+   * Register a Delivery on the database
+   */
   async store(req, res) {
     const schema = Yup.object().shape({
       product: Yup.string().required(),
@@ -61,8 +63,11 @@ class DeliveryController {
     return res.json(delivery);
   }
 
-  // List 1 or all deliveries according to the parameters informed.
+  /**
+   * List 1 or all deliveries according to the parameters informed.
+   */
   async index(req, res) {
+    const { page = 1 } = req.query;
     const { id } = req.body;
     if (id) {
       const deliveryOne = await Delivery.findByPk(id);
@@ -73,11 +78,16 @@ class DeliveryController {
       return res.json(deliveryOne);
     }
 
-    const deliveryAll = await Delivery.findAll();
+    const deliveryAll = await Delivery.findAll({
+      limit: 20,
+      offset: (page - 1) * 20
+    });
     return res.json(deliveryAll);
   }
 
-  // Delete a Delivery from the database
+  /**
+   * Delete a Delivery from the database
+   */
   async delete(req, res) {
     const { id } = req.body;
     const delivery = await Delivery.findByPk(id);
@@ -90,7 +100,9 @@ class DeliveryController {
     return res.json({ message: `Delivery Nº ${delivery.id} was deleted!` });
   }
 
-  // Update a delivery and all this dependencies on the database
+  /**
+   * Update a delivery and all this dependencies on the database
+   */
   async update(req, res) {
     const schema = Yup.object().shape({
       id: Yup.number().required(),
@@ -142,6 +154,8 @@ class DeliveryController {
      * have the guarantee that it is an authenticated user and necessarily
      * an Admin.
      */
+
+    await delivery.update(req.body);
 
     return res.json({ message: `The delivery nº ${id} was updated` });
   }

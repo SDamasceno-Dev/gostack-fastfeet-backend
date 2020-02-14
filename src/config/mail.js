@@ -1,3 +1,8 @@
+/**
+ * @description: Configuration for App Email tests with mailtrap.io.
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ */
+
 export default {
   host: 'smtp.mailtrap.io',
   port: 2525,

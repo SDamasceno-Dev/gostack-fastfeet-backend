@@ -34,9 +34,7 @@ class DeliveryStartController {
         .json({ error: 'You are not allowed to execute this delivery!' });
     }
 
-    /**
-     * Record the time of product withdrawal for delivery.
-     */
+    /** * Record the time of product withdrawal for delivery. ** */
 
     // Setting the time allowed for picking up orders for delivery.
     const parsedStart_Date = parseISO(start_date);
@@ -50,9 +48,7 @@ class DeliveryStartController {
         });
       }
 
-      /**
-       * Check the limit of 5 deliveries for each courier per day.
-       */
+      // Check the limit of 5 deliveries for each courier per day.
       const withdrawalCount = await Delivery.findAndCountAll({
         where: {
           courier_id,

@@ -18,6 +18,7 @@ class DeliveryProblemController {
    * Distributor List all Deliveries with a Problem
    */
   async show(req, res) {
+    const { page = 1 } = req.query;
     const deliveriesProblems = await Delivery.findAll({
       where: {
         signature_id: null
@@ -30,7 +31,9 @@ class DeliveryProblemController {
           required: true,
           attributes: []
         }
-      ]
+      ],
+      limit: 20,
+      offset: (page - 1) * 20
     });
     return res.json(deliveriesProblems);
   }
@@ -39,12 +42,13 @@ class DeliveryProblemController {
    * Distributor list all Problems of a Delivery.
    */
   async index(req, res) {
+    const { page = 1 } = req.query;
     const delivery_id = req.params.deliveryid;
     const delivery = await DeliveryProblem.findAll({
       where: {
         delivery_id
       },
-      attributes: ['description'],
+      attributes: ['id', 'description'],
       include: [
         {
           model: Delivery,
@@ -70,7 +74,9 @@ class DeliveryProblemController {
             }
           ]
         }
-      ]
+      ],
+      limit: 20,
+      offset: (page - 1) * 20
     });
     return res.json({ delivery });
   }
@@ -126,18 +132,28 @@ class DeliveryProblemController {
    */
   async delete(req, res) {
     const id = req.params.deliveryproblemid;
-    const { recipient_id, courier_id, delivery_id, canceled_at } = req.body;
-    const courier = await Courier.findByPk(courier_id);
-    const recipient = await Recipient.findByPk(recipient_id);
-    const delivery = await Delivery.findByPk(delivery_id);
-    const deliveryproblem = await DeliveryProblem.findByPk(id);
-
-    // Check if the delivery exists
-    if (delivery === null) {
-      return res.status(401).json({
-        error: 'This delivery does not exists. Please check and search again!'
-      });
-    }
+    const { canceled_at } = req.body;
+    const deliveryproblem = await DeliveryProblem.findOne({
+      where: {
+        id
+      },
+      attributes: ['id', 'description'],
+      include: [
+        {
+          model: Delivery,
+          as: 'delivery',
+          attributes: [
+            'id',
+            'product',
+            'start_date',
+            'courier_id',
+            'recipient_id',
+            'end_date',
+            'canceled_at'
+          ]
+        }
+      ]
+    });
 
     // Check if the deliveryproblem exists
     if (deliveryproblem === null) {
@@ -146,37 +162,28 @@ class DeliveryProblemController {
       });
     }
 
-    // Checks whether the reported problem belongs to the delivery.
-    if (!(delivery_id === deliveryproblem.delivery_id)) {
-      return res.status(401).json({
-        error: 'The selected problem does not belong to this delivery.'
-      });
-    }
-
     // Check if delivery was already ended
-    if (!((delivery.end_date || delivery.signature_id) === null)) {
+    if (!(deliveryproblem.delivery.end_date === null)) {
       return res
         .status(401)
         .json({ error: 'This delivery has already ended.' });
     }
 
     // Check if delivery was already canceled
-    if (!(delivery.canceled_at === null)) {
+    if (!(deliveryproblem.delivery.canceled_at === null)) {
       return res
         .status(401)
         .json({ error: 'This delivery has already canceled.' });
     }
 
-    // Checks if the delivery has the registered cancellation problem.
-    if (deliveryproblem.description === null) {
-      return res.status(401).json({
-        error:
-          'This delivery theres no problem registered. Please, inform before cancel it.'
-      });
-    }
-
     // Cancel delivery due to problems.
-    await delivery.update({ canceled_at });
+    await deliveryproblem.delivery.update({ canceled_at });
+
+    const delivery = await Delivery.findByPk(deliveryproblem.delivery.id);
+    const courier = await Courier.findByPk(deliveryproblem.delivery.courier_id);
+    const recipient = await Recipient.findByPk(
+      deliveryproblem.delivery.recipient_id
+    );
 
     await Queue.add(CanceledMail.key, {
       courier,
@@ -185,7 +192,7 @@ class DeliveryProblemController {
       deliveryproblem
     });
 
-    return res.json(delivery);
+    return res.json({ message: 'This delivery was canceled due a problem!' });
   }
 }
 

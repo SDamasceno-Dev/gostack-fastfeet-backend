@@ -1,5 +1,5 @@
 /**
- * @description: Database configuration with access credentials.
+ * @description: Postgres Database configuration with access credentials.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 

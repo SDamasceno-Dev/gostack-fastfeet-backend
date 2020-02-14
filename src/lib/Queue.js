@@ -1,3 +1,8 @@
+/**
+ * @description: Email queue configuration file.
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ */
+
 import Bee from 'bee-queue';
 import DeliveryMail from '../app/jobs/DeliveryMail';
 import CanceledMail from '../app/jobs/CanceledMail';

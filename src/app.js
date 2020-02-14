@@ -1,5 +1,5 @@
 /**
- * @description: Includes the configuration of the Express server.
+ * @description: Configuration of the Express server.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 

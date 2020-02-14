@@ -48,6 +48,7 @@ routes.use(authMiddleware);
 
 // Admin update
 routes.put('/admin', AdminController.update);
+routes.get('/admin', AdminController.index);
 
 // Courier Entity Routes
 routes.get('/courier', CourierController.index);
@@ -61,6 +62,7 @@ routes.get('/recipient', RecipientController.index);
 routes.put('/recipient', RecipientController.update);
 routes.delete('/recipient', RecipientController.delete);
 
+// Files Routes
 routes.post('/files', upload.single('file'), FileController.store);
 
 // Delivery Entity Routes

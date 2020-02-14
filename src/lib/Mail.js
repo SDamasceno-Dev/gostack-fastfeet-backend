@@ -1,3 +1,8 @@
+/**
+ * @description: Configuration mail file
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ */
+
 import nodemailer from 'nodemailer';
 import { resolve } from 'path';
 import exphbs from 'express-handlebars';

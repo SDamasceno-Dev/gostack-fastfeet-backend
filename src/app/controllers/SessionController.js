@@ -10,6 +10,9 @@ import Admin from '../models/Admin';
 import authConfig from '../../config/auth';
 
 class SessionController {
+  /**
+   * Create an Admin Session
+   */
   async store(req, res) {
     const schema = Yup.object().shape({
       email: Yup.string()

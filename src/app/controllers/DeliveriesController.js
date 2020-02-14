@@ -5,20 +5,19 @@ import File from '../models/File';
 
 class DeliveriesListController {
   async index(req, res) {
-    const { id } = req.params;
     const { page = 1, delivered } = req.query;
+    const { id } = req.params;
 
     const deliveryActive = await Delivery.findAll({
       where: {
         courier_id: id,
         end_date: {
+          // Based on delivered value, list a different results.
           [Op[delivered === 'true' ? 'ne' : 'eq']]: null
         }
       },
       attributes: ['id', 'product', 'start_date', 'end_date'],
       order: [['id', 'ASC']],
-      limit: 20,
-      offset: (page - 1) * 20,
       include: [
         {
           model: Recipient,
@@ -39,7 +38,9 @@ class DeliveriesListController {
           as: 'signature',
           attributes: ['path', 'url']
         }
-      ]
+      ],
+      limit: 20,
+      offset: (page - 1) * 20
     });
 
     return res.json(deliveryActive);

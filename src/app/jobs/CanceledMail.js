@@ -1,3 +1,8 @@
+/**
+ * @description: Background job for delivery cancellation mail.
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ */
+
 import Mail from '../../lib/Mail';
 
 class CanceledMail {
