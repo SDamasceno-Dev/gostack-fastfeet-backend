@@ -132,9 +132,6 @@ dist/
 # DynamoDB Local files
 .dynamodb/
 
-# Temporary folders
-temp/
-
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
