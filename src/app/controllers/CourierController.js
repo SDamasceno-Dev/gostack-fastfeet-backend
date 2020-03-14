@@ -5,6 +5,8 @@
  */
 
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
+
 import Courier from '../models/Courier';
 import File from '../models/File';
 import Delivery from '../models/Delivery';
@@ -99,6 +101,19 @@ class CourierController {
    */
   async index(req, res) {
     const { page = 1 } = req.query;
+    const { q = null } = req.query;
+
+    if (q !== null) {
+      const courierListQuery = await Courier.findAll({
+        where: {
+          name: {
+            [Op.iLike]: `%${q}%`
+          }
+        }
+      });
+      return res.json(courierListQuery);
+    }
+
     const courier = await Courier.findAll({
       limit: 20,
       offset: (page - 1) * 20

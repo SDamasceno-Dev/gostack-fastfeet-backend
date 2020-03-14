@@ -1,4 +1,10 @@
+/**
+ * @description: Controller that lsit all deliveries with or no params
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ */
+
 import { Op } from 'sequelize';
+
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import File from '../models/File';

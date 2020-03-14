@@ -5,6 +5,7 @@
  */
 
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
@@ -65,11 +66,16 @@ class DeliveryController {
   }
 
   /**
-   * List 1 or all deliveries according to the parameters informed.
+   * List deliveries according to the parameters informed.
    */
   async index(req, res) {
+    // Query params search
     const { page = 1 } = req.query;
+    const { q = null } = req.query;
+
+    // Request body params
     const { id } = req.body;
+
     if (id) {
       const deliveryOne = await Delivery.findByPk(id);
       if (!deliveryOne) {
@@ -79,10 +85,22 @@ class DeliveryController {
       return res.json(deliveryOne);
     }
 
+    if (q !== null) {
+      const deliveryListQuery = await Delivery.findAll({
+        where: {
+          product: {
+            [Op.iLike]: `%${q}%`
+          }
+        }
+      });
+      return res.json(deliveryListQuery);
+    }
+
     const deliveryAll = await Delivery.findAll({
       limit: 20,
       offset: (page - 1) * 20
     });
+
     return res.json(deliveryAll);
   }
 

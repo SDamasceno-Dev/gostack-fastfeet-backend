@@ -5,6 +5,7 @@
 
 import express from 'express';
 import path from 'path';
+import cors from 'cors';
 import routes from './routes';
 
 import './database';
@@ -18,6 +19,7 @@ class App {
 
   // Use JSON in all Req and Res
   middlewares() {
+    this.server.use(cors()); // Define addresses allowed to use this api
     this.server.use(express.json());
     this.server.use(
       '/files',
