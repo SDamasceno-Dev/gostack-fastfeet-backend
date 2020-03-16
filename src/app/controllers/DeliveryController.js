@@ -76,6 +76,7 @@ class DeliveryController {
     // Request body params
     const { id } = req.body;
 
+    // Search a specific delivery
     if (id) {
       const deliveryOne = await Delivery.findByPk(id);
       if (!deliveryOne) {
@@ -85,6 +86,7 @@ class DeliveryController {
       return res.json(deliveryOne);
     }
 
+    // Search with query parameter defined
     if (q !== null) {
       const deliveryListQuery = await Delivery.findAll({
         where: {
@@ -96,7 +98,21 @@ class DeliveryController {
       return res.json(deliveryListQuery);
     }
 
+    // Bring all deliveries
     const deliveryAll = await Delivery.findAll({
+      order: [['id', 'ASC']],
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['name', 'city', 'state']
+        },
+        {
+          model: Courier,
+          as: 'courier',
+          attributes: ['name']
+        }
+      ],
       limit: 20,
       offset: (page - 1) * 20
     });
