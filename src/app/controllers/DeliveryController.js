@@ -87,19 +87,12 @@ class DeliveryController {
     }
 
     // Search with query parameter defined
-    if (q !== null) {
-      const deliveryListQuery = await Delivery.findAll({
-        where: {
-          product: {
-            [Op.iLike]: `%${q}%`
-          }
+    const deliveryList = await Delivery.findAll({
+      where: {
+        product: {
+          [Op.iLike]: `%${q || ''}%`
         }
-      });
-      return res.json(deliveryListQuery);
-    }
-
-    // Bring all deliveries
-    const deliveryAll = await Delivery.findAll({
+      },
       order: [['id', 'ASC']],
       include: [
         {
@@ -116,8 +109,7 @@ class DeliveryController {
       limit: 20,
       offset: (page - 1) * 20
     });
-
-    return res.json(deliveryAll);
+    return res.json(deliveryList);
   }
 
   /**
