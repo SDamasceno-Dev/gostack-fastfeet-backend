@@ -10,6 +10,7 @@ import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Courier from '../models/Courier';
+import File from '../models/File';
 
 import DeliveryMail from '../jobs/DeliveryMail';
 import Queue from '../../lib/Queue';
@@ -98,12 +99,32 @@ class DeliveryController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['name', 'city', 'state']
+          attributes: [
+            'name',
+            'street',
+            'number',
+            'complement',
+            'city',
+            'state',
+            'zipcode'
+          ]
+        },
+        {
+          model: File,
+          as: 'signature',
+          attributes: ['path', 'url']
         },
         {
           model: Courier,
           as: 'courier',
-          attributes: ['name']
+          attributes: ['name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['path', 'url']
+            }
+          ]
         }
       ],
       limit: 20,
@@ -116,8 +137,8 @@ class DeliveryController {
    * Delete a Delivery from the database
    */
   async delete(req, res) {
-    const { id } = req.body;
-    const delivery = await Delivery.findByPk(id);
+    const { idItem } = req.query;
+    const delivery = await Delivery.findByPk(idItem);
 
     if (!delivery) {
       return res.status(401).json({ error: 'This delivery does not exist!' });

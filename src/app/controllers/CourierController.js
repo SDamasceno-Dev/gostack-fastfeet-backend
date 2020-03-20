@@ -103,20 +103,22 @@ class CourierController {
     const { page = 1 } = req.query;
     const { q = null } = req.query;
 
-    if (q !== null) {
-      const courierListQuery = await Courier.findAll({
-        where: {
-          name: {
-            [Op.iLike]: `%${q}%`
-          }
-        }
-      });
-      return res.json(courierListQuery);
-    }
-
     const courier = await Courier.findAll({
       limit: 20,
-      offset: (page - 1) * 20
+      offset: (page - 1) * 20,
+      where: {
+        name: {
+          [Op.iLike]: `%${q || ''}%`
+        }
+      },
+      order: [['id', 'ASC']],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['path', 'url']
+        }
+      ]
     });
     return res.json(courier);
   }

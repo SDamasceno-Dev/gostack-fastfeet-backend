@@ -21,7 +21,7 @@ class Courier extends Model {
 
   // Associate the table Courier with table File (sequelize)
   static associate(models) {
-    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
+    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
   }
 }
 

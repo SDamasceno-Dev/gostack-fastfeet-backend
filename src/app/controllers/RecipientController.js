@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import { Op } from 'sequelize';
 
 import Recipient from '../models/Recipient';
+import Delivery from '../models/Delivery';
 
 class RecipController {
   /**
@@ -45,22 +46,16 @@ class RecipController {
     const { page = 1 } = req.query;
     const { q = null } = req.query;
 
-    if (q !== null) {
-      const deliveryListQuery = await Recipient.findAll({
-        where: {
-          name: {
-            [Op.iLike]: `%${q}%`
-          }
-        }
-      });
-      return res.json(deliveryListQuery);
-    }
-
-    const recipients = await Recipient.findAll({
+    const deliveryListQuery = await Recipient.findAll({
       limit: 20,
-      offset: (page - 1) * 20
+      offset: (page - 1) * 20,
+      where: {
+        name: {
+          [Op.iLike]: `%${q || ''}%`
+        }
+      }
     });
-    return res.json(recipients);
+    return res.json(deliveryListQuery);
   }
 
   /**
@@ -116,12 +111,26 @@ class RecipController {
    * Delete a Recipient
    */
   async delete(req, res) {
-    const { id } = req.body;
-    const recipient = await Recipient.findByPk(id);
+    const { idItem } = req.query;
+    const recipient = await Recipient.findByPk(idItem);
 
     // Verify if recipient exists.
     if (!recipient) {
       return res.status(401).json({ error: 'This recipient does not exists!' });
+    }
+
+    if (
+      await Delivery.findOne({
+        where: {
+          recipient_id: {
+            [Op.eq]: idItem
+          }
+        }
+      })
+    ) {
+      return res.status(401).json({
+        error: `There's a delivery associate with this Courier. Delete the delivery first to exclude this Courier.`
+      });
     }
 
     await recipient.destroy();
