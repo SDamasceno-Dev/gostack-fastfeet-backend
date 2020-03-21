@@ -127,8 +127,8 @@ class CourierController {
    * Delete a Courier (Delete)
    */
   async delete(req, res) {
-    const { id } = req.body;
-    const courier = await Courier.findByPk(id);
+    const { idItem } = req.query;
+    const courier = await Courier.findByPk(idItem);
     const file = await File.findByPk(courier.avatar_id);
     const delivery = await Delivery.findOne({
       where: {

@@ -21,9 +21,7 @@ class RecipController {
       number: Yup.string().required(),
       complement: Yup.string().required(),
       city: Yup.string().required(),
-      state: Yup.string()
-        .required()
-        .max(2),
+      state: Yup.string().required(),
       zipcode: Yup.string().required()
     });
     if (!(await schema.isValid(req.body))) {
