@@ -15,6 +15,9 @@ class DeliveriesListController {
     const { id } = req.params;
 
     const deliveryActive = await Delivery.findAll({
+      limit: 7,
+      offset: (page - 1) * 7,
+      order: [['id', 'DESC']],
       where: {
         courier_id: id,
         end_date: {
@@ -23,7 +26,6 @@ class DeliveriesListController {
         }
       },
       attributes: ['id', 'product', 'start_date', 'end_date'],
-      order: [['id', 'ASC']],
       include: [
         {
           model: Recipient,
@@ -44,9 +46,7 @@ class DeliveriesListController {
           as: 'signature',
           attributes: ['path', 'url']
         }
-      ],
-      limit: 7,
-      offset: (page - 1) * 7
+      ]
     });
 
     return res.json(deliveryActive);

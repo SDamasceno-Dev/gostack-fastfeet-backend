@@ -89,12 +89,14 @@ class DeliveryController {
 
     // Search with query parameter defined
     const deliveryList = await Delivery.findAll({
+      limit: 7,
+      offset: (page - 1) * 7,
+      order: [['id', 'DESC']],
       where: {
         product: {
           [Op.iLike]: `%${q || ''}%`
         }
       },
-      order: [['id', 'ASC']],
       include: [
         {
           model: Recipient,
@@ -126,9 +128,7 @@ class DeliveryController {
             }
           ]
         }
-      ],
-      limit: 7,
-      offset: (page - 1) * 7
+      ]
     });
     return res.json(deliveryList);
   }

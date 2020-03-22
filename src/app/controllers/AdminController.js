@@ -50,8 +50,9 @@ class AdminController {
   async index(req, res) {
     const { page = 1 } = req.query;
     const admin = await Admin.findAll({
-      limit: 20,
-      offset: (page - 1) * 20
+      limit: 7,
+      offset: (page - 1) * 7,
+      order: [['id', 'DESC']]
     });
     return res.json(admin);
   }

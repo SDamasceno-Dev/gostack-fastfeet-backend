@@ -104,14 +104,14 @@ class CourierController {
     const { q = null } = req.query;
 
     const courier = await Courier.findAll({
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit: 7,
+      offset: (page - 1) * 7,
+      order: [['id', 'DESC']],
       where: {
         name: {
           [Op.iLike]: `%${q || ''}%`
         }
       },
-      order: [['id', 'ASC']],
       include: [
         {
           model: File,

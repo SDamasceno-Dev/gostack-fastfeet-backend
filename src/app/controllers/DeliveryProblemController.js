@@ -35,6 +35,9 @@ class DeliveryProblemController {
     const delivery_id = req.params.deliveryid;
     const delivery = await DeliveryProblem.findAll({
       where: {
+        limit: 7,
+        offset: (page - 1) * 7,
+        order: [['id', 'DESC']],
         delivery_id
       },
       attributes: ['id', 'description'],
@@ -63,9 +66,7 @@ class DeliveryProblemController {
             }
           ]
         }
-      ],
-      limit: 20,
-      offset: (page - 1) * 20
+      ]
     });
     return res.json({ delivery });
   }
@@ -121,7 +122,7 @@ class DeliveryProblemController {
    */
   async delete(req, res) {
     const id = req.params.deliveryproblemid;
-    const { canceled_at } = req.body;
+    const canceled_at = new Date();
     const deliveryproblem = await DeliveryProblem.findOne({
       where: {
         id
