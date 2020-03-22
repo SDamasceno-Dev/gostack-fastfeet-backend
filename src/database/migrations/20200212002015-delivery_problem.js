@@ -15,7 +15,7 @@ module.exports = {
         autoIncrement: false,
         references: { model: 'deliveries', key: 'id' },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
       },
       // DESCRIPTION Problem
       description: {

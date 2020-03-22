@@ -19,19 +19,8 @@ class DeliveryProblemController {
    */
   async show(req, res) {
     const { page = 1 } = req.query;
-    const deliveriesProblems = await Delivery.findAll({
-      where: {
-        signature_id: null
-      },
-      attributes: ['id', 'product'],
-      include: [
-        {
-          model: DeliveryProblem,
-          as: 'deliveryproblem',
-          required: true,
-          attributes: []
-        }
-      ],
+    const deliveriesProblems = await DeliveryProblem.findAll({
+      where: {},
       limit: 20,
       offset: (page - 1) * 20
     });
@@ -176,7 +165,7 @@ class DeliveryProblemController {
         .json({ error: 'This delivery has already canceled.' });
     }
 
-    // Cancel delivery due to problems.
+    // Inform by email the cancel delivery due to problems.
     await deliveryproblem.delivery.update({ canceled_at });
 
     const delivery = await Delivery.findByPk(deliveryproblem.delivery.id);
