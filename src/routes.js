@@ -9,6 +9,7 @@ import multerConfig from './config/multer';
 
 import AdminController from './app/controllers/AdminController';
 import SessionController from './app/controllers/SessionController';
+import CourierSessionController from './app/controllers/CourierSessionController';
 import RecipientController from './app/controllers/RecipientController';
 import CourierController from './app/controllers/CourierController';
 import FileController from './app/controllers/FileController';
@@ -28,6 +29,7 @@ routes.post('/admin', AdminController.store);
 
 // Session routes
 routes.post('/session', SessionController.store);
+routes.post('/couriersession', CourierSessionController.store);
 
 // Courier Routes
 routes.put('/courier/deliveries', DeliveryStartController.update);
