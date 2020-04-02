@@ -25,7 +25,7 @@ class DeliveriesListController {
           [Op[delivered === 'true' ? 'ne' : 'eq']]: null
         }
       },
-      attributes: ['id', 'product', 'start_date', 'end_date'],
+      attributes: ['id', 'product', 'created_at', 'start_date', 'end_date'],
       include: [
         {
           model: Recipient,
