@@ -1,49 +1,49 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('recipients', {
-      // Id Client.
+      // Id Client
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
       },
-      // NAME Client.
+      // NAME Client
       name: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      // STREET Client.
+      // STREET Client
       street: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
       },
-      // PLACE NUMBER Client.
+      // PLACE NUMBER Client
       number: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
       },
-      // COMPLEMENT Client.
+      // COMPLEMENT Client
       complement: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
       },
-      // CITY Client.
+      // CITY Client
       city: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
       },
-      // STATE Client.
+      // STATE Client
       state: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
       },
-      // ZIP CODE Client.
+      // ZIP CODE Client
       zipcode: {
         type: Sequelize.STRING,
         allowNull: false,

@@ -1,8 +1,9 @@
 /**
- * @description: Model file of Admin entity
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Model file of Admin entity
  */
 
+// Import of the dependencies used in this Model
 import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
@@ -19,10 +20,8 @@ class Admin extends Model {
         sequelize
       }
     );
-    /**
-     * Code snippets that are executed automatically based on actions that
-     * occur in the model
-     */
+    // Code snippets that are executed automatically based on actions that
+    // occur in the model
     this.addHook('beforeSave', async admin => {
       if (admin.password) {
         admin.password_hash = await bcrypt.hash(admin.password, 8);

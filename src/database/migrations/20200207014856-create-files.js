@@ -1,19 +1,19 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('files', {
-      // Id File.
+      // Id File
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
       },
-      // NAME File.
+      // NAME File
       name: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      // PATH File.
+      // PATH File
       path: {
         type: Sequelize.STRING,
         allowNull: false,

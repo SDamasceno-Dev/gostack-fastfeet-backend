@@ -1,8 +1,9 @@
 /**
- * @description: Model file of File entity.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Model file of File entity.
  */
 
+// Import of the dependencies used in this Model
 import Sequelize, { Model } from 'sequelize';
 
 class File extends Model {
@@ -14,6 +15,7 @@ class File extends Model {
         url: {
           type: Sequelize.VIRTUAL,
           get() {
+            // path used locally for file storage
             return `http://localhost:3028/files/${this.path}`;
           }
         }

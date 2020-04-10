@@ -1,6 +1,6 @@
 /**
- * @description: Configuration of the Express server.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Configuration of the Express server.
  */
 
 import express from 'express';

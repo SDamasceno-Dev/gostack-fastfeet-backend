@@ -1,14 +1,14 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('couriers', {
-      // Id Courier.
+      // Id Courier
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
       },
-      // NAME Courier.
+      // NAME Courier
       name: {
         type: Sequelize.STRING,
         allowNull: false

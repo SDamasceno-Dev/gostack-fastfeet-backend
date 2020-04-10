@@ -1,8 +1,10 @@
 /**
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  * @description: Controller that allows the upload of files to server.
  * in the Database
- * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
+
+// Import model used in this controller
 import File from '../models/File';
 
 class FileController {

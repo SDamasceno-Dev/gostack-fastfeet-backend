@@ -1,57 +1,61 @@
 /**
- * @description: Controller of the Delivery Problem.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Delivery problems controller
  */
 
+// Import of the dependencies used in this controller
 import * as Yup from 'yup';
 
+// Import models used in this controller
 import Delivery from '../models/Delivery';
 import Courier from '../models/Courier';
 import Recipient from '../models/Recipient';
 import DeliveryProblem from '../models/DeliveryProblem';
 
+// Import dependencies for sending email
 import CanceledMail from '../jobs/CanceledMail';
 import Queue from '../../lib/Queue';
 
 class DeliveryProblemController {
-  /**
-   * Distributor List all Deliveries with a Problem
-   */
+  // Distributor List all Deliveries with a Problem
   async show(req, res) {
     const { page = 1 } = req.query;
     const deliveriesProblems = await DeliveryProblem.findAll({
+      // Config search
       where: {},
-      limit: 20,
+      limit: 7,
       offset: (page - 1) * 20
     });
     return res.json(deliveriesProblems);
   }
 
-  /**
-   * Distributor list all Problems of a Delivery.
-   */
+  // Distributor list all Problems of a Delivery
   async index(req, res) {
     const { page = 1 } = req.query;
     const delivery_id = req.params.deliveryid;
     const delivery = await DeliveryProblem.findAll({
+      // Config search
       where: {
-        limit: 7,
-        offset: (page - 1) * 7,
-        order: [['id', 'DESC']],
         delivery_id
       },
-      attributes: ['id', 'description'],
+      order: [['id', 'DESC']],
+      limit: 7,
+      offset: (page - 1) * 7,
+      attributes: ['id', 'description', 'created_at'],
+      // Include Delivery data in the search result
       include: [
         {
           model: Delivery,
           as: 'delivery',
           attributes: ['product', 'start_date'],
+          // Include Courier data in the search result
           include: [
             {
               model: Courier,
               as: 'courier',
               attributes: ['name', 'email']
             },
+            // Include Recipient data in the search result
             {
               model: Recipient,
               as: 'recipient',
@@ -71,17 +75,16 @@ class DeliveryProblemController {
     return res.json({ delivery });
   }
 
-  /**
-   * Register a delivery Problem
-   */
+  // Register a delivery Problem
   async store(req, res) {
-    const { courier_id, description } = req.body;
+    const { courier_id, description } = req.query;
     const delivery_id = req.params.deliveryid;
 
     const schema = Yup.object().shape({
       description: Yup.string().required()
     });
-    if (!(await schema.isValid(req.body))) {
+    // Validate the data informed to this action
+    if (!(await schema.isValid(req.query))) {
       return res.status(400).json({
         error: 'To inform a problem, you must enter the description.'
       });
@@ -96,15 +99,15 @@ class DeliveryProblemController {
       });
     }
 
-    // Verify if delivery already done.
+    // Verify if delivery already done
     if (!(delivery.end_date === null)) {
       return res.status(400).json({
         error: `This delivery already done. It's not possible to inform a problem!`
       });
     }
 
-    // Check whether the delivery belongs to the courier.
-    if (!(courier_id === delivery.courier_id)) {
+    // Check whether the delivery belongs to the Courier
+    if (!(courier_id === String(delivery.courier_id))) {
       return res.status(401).json({
         error: `You don't have authorization to update this delivery. Please verify if you informed your id.`
       });
@@ -117,17 +120,17 @@ class DeliveryProblemController {
     return res.json(deliveryProblem);
   }
 
-  /**
-   * Cancellation of delivery due to problem.
-   */
+  // Cancellation of delivery due to problem
   async delete(req, res) {
     const id = req.params.deliveryproblemid;
     const canceled_at = new Date();
     const deliveryproblem = await DeliveryProblem.findOne({
+      // Config search
       where: {
         id
       },
       attributes: ['id', 'description'],
+      // Include Delivery data in the search result
       include: [
         {
           model: Delivery,

@@ -1,8 +1,9 @@
 /**
- * @description: Model file of a Delivery entity.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Model file of a Delivery entity.
  */
 
+// Import of the dependencies used in this Model
 import Sequelize, { Model } from 'sequelize';
 
 class Delivery extends Model {
@@ -32,6 +33,7 @@ class Delivery extends Model {
     return this; // Return the model that has just been initialized.
   }
 
+  // Defines the associations that this model has with other models
   static associate(models) {
     this.belongsTo(models.Recipient, {
       foreignKey: 'recipient_id',

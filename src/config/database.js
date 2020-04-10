@@ -1,6 +1,6 @@
 /**
- * @description: Postgres Database configuration with access credentials.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Postgres Database configuration with access credentials.
  */
 
 module.exports = {

@@ -1,13 +1,15 @@
 /**
- * @description: Configuration mail file
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Configuration mail file
  */
 
+// Import of the dependencies used in this Mail lib
 import nodemailer from 'nodemailer';
 import { resolve } from 'path';
 import exphbs from 'express-handlebars';
 import nodemailerhbs from 'nodemailer-express-handlebars';
 
+// Import of the configuration file
 import mailConfig from '../config/mail';
 
 class Mail {
@@ -25,6 +27,7 @@ class Mail {
   configureTemplates() {
     const viewPath = resolve(__dirname, '..', 'app', 'views', 'emails');
 
+    // Defines the parameters of email based on layouts and partials files
     this.transporter.use(
       'compile',
       nodemailerhbs({

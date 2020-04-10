@@ -1,6 +1,6 @@
 /**
- * @description: Configuration file for creating the active session token.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Configuration file for creating the active session token
  */
 
 export default {
@@ -8,4 +8,4 @@ export default {
   expiresIn: '3d'
 };
 
-// https://www.md5online.org/
+// site used to generate the secret: https://www.md5online.org/

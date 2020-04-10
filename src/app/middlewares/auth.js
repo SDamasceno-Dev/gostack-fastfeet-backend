@@ -1,9 +1,10 @@
 /**
- * @description: Checks if the active session is from an Admin and blocks if
- * negative
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Checks if the active session has a valid token. Blocks if
+ * negative
  */
 
+// Import of the dependencies used in this middleware
 import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 import authConfig from '../../config/auth';

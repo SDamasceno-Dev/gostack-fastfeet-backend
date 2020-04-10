@@ -1,11 +1,14 @@
 /**
- * @description: Email queue configuration file.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Email queue configuration file.
  */
 
+// Import of the dependencies used in this Queue
 import Bee from 'bee-queue';
 import DeliveryMail from '../app/jobs/DeliveryMail';
 import CanceledMail from '../app/jobs/CanceledMail';
+
+// Import the redis config of this queue job
 import redisConfig from '../config/redis';
 
 const jobs = [DeliveryMail, CanceledMail];

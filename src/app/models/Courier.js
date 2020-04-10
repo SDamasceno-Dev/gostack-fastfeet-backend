@@ -1,8 +1,9 @@
 /**
- * @description: Model file of Courier entity.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Model file of Courier entity.
  */
 
+// Import of the dependencies used in this Model
 import Sequelize, { Model } from 'sequelize';
 
 class Courier extends Model {
@@ -10,7 +11,8 @@ class Courier extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        email: Sequelize.STRING
+        email: Sequelize.STRING,
+        created_at: Sequelize.DATE
       },
       {
         sequelize

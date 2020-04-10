@@ -4,16 +4,16 @@
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 
+// Import of the dependencies used in this controller
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
 
+// Import models used in this controller
 import Recipient from '../models/Recipient';
 import Delivery from '../models/Delivery';
 
 class RecipController {
-  /**
-   * Store a Recipient
-   */
+  // Store a Recipient
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -24,6 +24,7 @@ class RecipController {
       state: Yup.string().required(),
       zipcode: Yup.string().required()
     });
+    // Validate the data informed to this action
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({
         error:
@@ -36,15 +37,14 @@ class RecipController {
     return res.json(recipient);
   }
 
-  /**
-   * List all Recipients (Index)
-   */
+  // List all Recipients (Index)
   async index(req, res) {
     // Query params search
     const { page = 1 } = req.query;
     const { q = null } = req.query;
 
     const deliveryListQuery = await Recipient.findAll({
+      // Config search
       limit: 7,
       offset: (page - 1) * 7,
       order: [['id', 'DESC']],
@@ -57,9 +57,7 @@ class RecipController {
     return res.json(deliveryListQuery);
   }
 
-  /**
-   * Update a Recipient
-   */
+  // Update a Recipient
   async update(req, res) {
     const schema = Yup.object().shape({
       id: Yup.number(),
@@ -78,11 +76,9 @@ class RecipController {
       });
     }
 
-    /**
-     * As the middleware is on the route defined before the update method,
-     * have the guarantee that it is an authenticated user and necessarily
-     * an Admin.
-     */
+    // Since the middleware is on the route defined before the update method,
+    // it is guaranteed to be an authenticated user and necessarily an
+    // administrator.
     const { id } = req.body;
     const recipient = await Recipient.findByPk(id);
     const {
@@ -106,9 +102,7 @@ class RecipController {
     });
   }
 
-  /**
-   * Delete a Recipient
-   */
+  // Delete a Recipient
   async delete(req, res) {
     const { idItem } = req.query;
     const recipient = await Recipient.findByPk(idItem);

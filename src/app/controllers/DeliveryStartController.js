@@ -1,12 +1,14 @@
 /**
- * @description: Controller of the start of Delivery to the Recipient.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Controller of the start of Delivery to the Recipient
  */
 
+// Import of the dependencies used in this controller
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
 import { getHours, parseISO, startOfDay, endOfDay } from 'date-fns';
 
+// Import models used in this controller
 import Delivery from '../models/Delivery';
 
 class DeliveryStartController {
@@ -17,7 +19,7 @@ class DeliveryStartController {
       withdrawal: Yup.boolean().required(),
       start_date: Yup.date()
     });
-
+    // Validate the data informed to this action
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({
         error: 'Delivery was not updated! Check the information provided.'
@@ -27,7 +29,7 @@ class DeliveryStartController {
     const { id, courier_id, withdrawal, start_date } = req.body;
     const delivery = await Delivery.findByPk(id);
 
-    // Check that the courier is responsible for delivery.
+    // Check that the courier is responsible for delivery
     if (!(delivery.courier_id === courier_id)) {
       return res
         .status(401)

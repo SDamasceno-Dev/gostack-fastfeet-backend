@@ -1,12 +1,14 @@
 /**
- * @description: Here is the entire routes structure of the App.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Here is the entire routes structure of the App.
  */
 
+// Import of the dependencies used in this route configuration
 import { Router } from 'express';
 import multer from 'multer';
 import multerConfig from './config/multer';
 
+// Import of the controllers used here
 import AdminController from './app/controllers/AdminController';
 import SessionController from './app/controllers/SessionController';
 import CourierSessionController from './app/controllers/CourierSessionController';
@@ -19,6 +21,7 @@ import DeliveryEndController from './app/controllers/DeliveryEndController';
 import DeliveriesController from './app/controllers/DeliveriesController';
 import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
+// Import the middleware
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();

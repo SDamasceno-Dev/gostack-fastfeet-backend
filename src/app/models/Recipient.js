@@ -1,8 +1,9 @@
 /**
- * @description: Model file of Recipient entity
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Model file of Recipient entity
  */
 
+// Import of the dependencies used in this Model
 import Sequelize, { Model } from 'sequelize';
 
 class Recipient extends Model {

@@ -1,18 +1,19 @@
 /**
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  * @description: Controller that allows the creation of valid conections
  * (sessions) with database.
- * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 
+// Import of the dependencies used in this controller
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
+
+// Import models used in this controller
 import Admin from '../models/Admin';
 import authConfig from '../../config/auth';
 
 class SessionController {
-  /**
-   * Create an Admin Session
-   */
+  // Create an Admin Session
   async store(req, res) {
     const schema = Yup.object().shape({
       email: Yup.string()
@@ -20,6 +21,7 @@ class SessionController {
         .required(),
       password: Yup.string().required()
     });
+    // Validate the data informed to this action
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({
         error: 'Session failed! Please enter your email and/or your password.'

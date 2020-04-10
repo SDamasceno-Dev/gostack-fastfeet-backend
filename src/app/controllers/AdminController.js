@@ -1,16 +1,17 @@
 /**
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  * @description: Controller that allows the CRUD of Admin records
  * in the Database
- * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 
-import * as Yup from 'yup'; // Schema validator
+// Import of the dependencies used in this controller
+import * as Yup from 'yup';
+
+// Import of the models used in this controller
 import Admin from '../models/Admin';
 
 class AdminController {
-  /**
-   * Create a Admin record
-   */
+  // Create a Admin record
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -21,11 +22,12 @@ class AdminController {
         .required()
         .min(6)
     });
+    // Validate the data informed to this action
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Admin does not created!' });
     }
 
-    // Check for an administrator login with this email.
+    // Checks for an administrator record with this email
     const adminExists = await Admin.findOne({
       where: { email: req.body.email }
     });
@@ -44,12 +46,11 @@ class AdminController {
     });
   }
 
-  /**
-   * List all Admin profiles
-   */
+  // List all Admin profiles
   async index(req, res) {
     const { page = 1 } = req.query;
     const admin = await Admin.findAll({
+      // Config search
       limit: 7,
       offset: (page - 1) * 7,
       order: [['id', 'DESC']]
@@ -57,9 +58,7 @@ class AdminController {
     return res.json(admin);
   }
 
-  /**
-   * Update Admin profile.
-   */
+  // Update Admin profile.
   async update(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string(),
@@ -74,6 +73,7 @@ class AdminController {
         password ? field.required().oneOf([Yup.ref('password')]) : field
       )
     });
+    // Validate the data informed to this action
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Password does not match!' });
     }
@@ -84,6 +84,7 @@ class AdminController {
     // Verify another admin with this email
     if (email && email !== admin.email) {
       const adminExists = await Admin.findOne({
+        // Config search
         where: { email }
       });
 
@@ -94,6 +95,7 @@ class AdminController {
       }
     }
 
+    // Checks whether the old password was entered correctly
     if (oldPassword && !(await admin.checkPassword(oldPassword))) {
       return res.status(401).json({ error: 'Old Password is incorrect!' });
     }

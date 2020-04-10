@@ -1,20 +1,20 @@
 /**
+ * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  * @description: Controller that allows the CRUD (Creation, Read, Update and
  *  Delete) of Couriers records in the Database
- * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
  */
 
+// Import of the dependencies used in this controller
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
 
+// Import models used in this controller
 import Courier from '../models/Courier';
 import File from '../models/File';
 import Delivery from '../models/Delivery';
 
 class CourierController {
-  /**
-   * Record a Courier (Store)
-   */
+  // Record a new Courier in DB
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -22,6 +22,7 @@ class CourierController {
         .email()
         .required()
     });
+    // Validate the data informed to this action
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({
         error: 'Courier was not created! Check the information entered.'
@@ -30,6 +31,7 @@ class CourierController {
 
     // Check if courier already exists.
     const courierExists = await Courier.findOne({
+      // Config search
       where: { email: req.body.email }
     });
     if (courierExists) {
@@ -49,9 +51,7 @@ class CourierController {
     return res.json(courier);
   }
 
-  /**
-   * Update a Courier (Update)
-   */
+  // Update a Courier
   async update(req, res) {
     const schema = Yup.object().shape({
       id: Yup.number(),
@@ -59,6 +59,7 @@ class CourierController {
       email: Yup.string().email(),
       avatar_id: Yup.number()
     });
+    // Validate the data informed to this action
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({
         error: 'Courier not updated! Check the information provided.'
@@ -68,7 +69,7 @@ class CourierController {
     const { id, email } = req.body;
     const courier = await Courier.findByPk(id);
 
-    // Verify if courier exists
+    // Verify if Courier exists
     if (courier === null) {
       return res.status(401).json({ error: 'This courier does not exists!' });
     }
@@ -84,11 +85,9 @@ class CourierController {
       }
     }
 
-    /**
-     * As the middleware is on the route defined before the update method,
-     * have the guarantee that it is an authenticated user and necessarily
-     * an Admin.
-     */
+    // Since the middleware is on the route defined before the update method,
+    // it is guaranteed to be an authenticated user and necessarily an
+    // administrator.
     const { name } = await courier.update(req.body);
     return res.json({
       name,
@@ -96,14 +95,13 @@ class CourierController {
     });
   }
 
-  /**
-   * List all Recipients (Index)
-   */
+  // List all Couriers
   async index(req, res) {
     const { page = 1 } = req.query;
     const { q = null } = req.query;
 
     const courier = await Courier.findAll({
+      // Config search
       limit: 7,
       offset: (page - 1) * 7,
       order: [['id', 'DESC']],
@@ -123,9 +121,7 @@ class CourierController {
     return res.json(courier);
   }
 
-  /**
-   * Delete a Courier (Delete)
-   */
+  // Delete a Courier (Delete)
   async delete(req, res) {
     const { idItem } = req.query;
     const courier = await Courier.findByPk(idItem);

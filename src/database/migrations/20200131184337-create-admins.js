@@ -8,18 +8,18 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true
       },
-      // NAME User.
+      // NAME User
       name: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      // EMAIL User.
+      // EMAIL User
       email: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
       },
-      // PASSWORD_HASH Store encrypted password.
+      // PASSWORD_HASH Store encrypted password
       password_hash: {
         type: Sequelize.STRING,
         allowNull: false

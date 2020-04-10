@@ -1,8 +1,9 @@
 /**
- * @description: Background job for new registered delivery.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Background work for sending new delivery record email
  */
 
+// Import of the Lib used in this in this job
 import Mail from '../../lib/Mail';
 
 class DeliveryMail {
@@ -15,8 +16,9 @@ class DeliveryMail {
 
     await Mail.sendMail({
       to: `${courier.name} <${courier.email}>`,
-      subject: 'Nova entrega cadastrada!',
-      template: 'deliveryNotification',
+      subject: 'Nova entrega cadastrada!', // Subject email
+      template: 'deliveryNotification', // Template used in this email
+      // Email's body with all data of cancellation
       context: {
         courierName: courier.name,
         deliveryProduct: delivery.product,

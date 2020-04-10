@@ -1,6 +1,6 @@
 /**
- * @description: Configuration for App Email tests with mailtrap.io.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Configuration for App Email tests with mailtrap.io
  */
 
 export default {

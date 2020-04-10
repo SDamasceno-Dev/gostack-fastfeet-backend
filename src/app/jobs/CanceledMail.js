@@ -1,8 +1,9 @@
 /**
- * @description: Background job for delivery cancellation mail.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Background work for sending delivery cancellation emails
  */
 
+// Import of the Lib used in this in this job
 import Mail from '../../lib/Mail';
 
 class CanceledMail {
@@ -15,8 +16,9 @@ class CanceledMail {
 
     await Mail.sendMail({
       to: `${courier.name} <${courier.email}>`,
-      subject: 'Entrega cancelada!',
-      template: 'canceledNotification',
+      subject: 'Entrega cancelada!', // Subject email
+      template: 'canceledNotification', // Template used in this email
+      // Email's body with all data of cancellation
       context: {
         courierName: courier.name,
         deliveryProduct: delivery.product,

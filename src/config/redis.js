@@ -1,6 +1,6 @@
 /**
- * @description: Configuration for Redis connect.
  * @author: Sandro Damasceno <sdamasceno.dev@gmail.com>
+ * @description: Configuration for Redis connect
  */
 
 export default {
