@@ -92,21 +92,21 @@ $ yarn
   <li>
   Após a instalação e configuração da conexão com o Postgres, pode-se efetuar a migração das tabelas desse banco. Para isso iremos utilizar o <span style="font-weight: bold; text-decoration:italic; color: #607541">sequelize-cli</span>, executando o seguinte comando:
 
-  ```
+  ```bash
   # Executa a migração criando as tabelas no banco de dados Postgres
   $ yarn sequelize db:migrate
   ```
   <li>
   Após a criação de todas as tabelas necessárias para o sistema executar de maneira correta, você tem a opção de criar um usuário administrador padrão. Para isso, iremos utilizar novamente o <span style="font-weight: bold; text-decoration:italic; color: #607541">sequelize-cli</span> executando o seguinte comando:
 
-  ```
+  ```bash
   # Cria o usuário padrão com perfil de administrador no sistema FastFeet
   $ yarn sequelize db:seed:all
   ```
 
   Este usuário possui os seguintes dados:
 
-  ```
+  ```bash
   name: 'Distribuidora FastFeet'
   email: 'admin@fastfeet.com'
   password: '123456'
@@ -115,14 +115,14 @@ $ yarn
   <li>
   Com todas as tabela criadas e o usuário padrão com perfil administrador configurado, já é possível seguir iniciar os serviços do Back-end. Para isso, basta executar os seguintes comandos, sendo que é necessário que cada comando seja executado em uma instância diferente do terminal:
 
-  ```
+  ```bash
   # Comando para rodar os serviços do Postgres no Back-end do Sistema FastFeet
   $ yarn dev
   ```
 
   Com uma outra instância do terminal aberta, execute agora o seguinte comando:
 
-  ```
+  ```bash
   # Comando para rodar os serviços do Redis no Back-end do Sistema FastFeet
   $ yarn queue
   ```
@@ -138,17 +138,20 @@ Com o intuito de tornar esse módulo mais didático, serão aqui citadas algumas
 
 <ul>
 <li>
-  <span style="font-weight: bold; text-decoration: underline">Controllers</span> (/src/app/controllers)
-  <p>
+
+  **Controllers**  (/src/app/controllers)
   Nessa pasta estão localizados todos os controllers do Sistema FastFeet. Esses controllers definem as regras de negócio para cada uma das entidades que fazem parte do sistema (Administrador, Entregador, Encomenda, Cliente). Estas regras de negócio englobam desde a definição e horários para que as entregas possam ser retiradas para serem entregues até a necessidade de se coletar a assinatura da entrega para se finalizar a mesma.
   </p>
 </li>
 <li>
-  <span style="font-weight: bold; text-decoration: underline">Models</span> (/src/app/models)
-  <p>
+
+  **Models** (/src/app/models)
   Aqui estão armazenados todos os arquivos modelos das entidades do sistema FastFeet
   </p>
 </li>
 <li></li>
 <li></li>
 </ul>
+
+---
+Criado e editado por Sandro de Oliveira Damasceno  [github!](https://github.com/SDamasceno-Dev) :octocat:
