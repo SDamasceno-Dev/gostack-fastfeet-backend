@@ -15,9 +15,9 @@ class DeliveryStartController {
   async update(req, res) {
     const schema = Yup.object().shape({
       id: Yup.number().required(),
-      courier_id: Yup.number(),
+      courier_id: Yup.number().required(),
       withdrawal: Yup.boolean().required(),
-      start_date: Yup.date()
+      start_date: Yup.date().required()
     });
     // Validate the data informed to this action
     if (!(await schema.isValid(req.body))) {
@@ -27,6 +27,7 @@ class DeliveryStartController {
     }
 
     const { id, courier_id, withdrawal, start_date } = req.body;
+
     const delivery = await Delivery.findByPk(id);
 
     // Check that the courier is responsible for delivery

@@ -121,8 +121,8 @@ class RecipController {
         }
       })
     ) {
-      return res.status(401).json({
-        error: `There's a delivery associate with this Courier. Delete the delivery first to exclude this Courier.`
+      return res.status(400).json({
+        error: `Existe uma entrega associada a este registro. Primeiro retire todas as entregas associadas para poder deletar este registro.`
       });
     }
 
