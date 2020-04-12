@@ -56,17 +56,37 @@ Abaixo estão listadas, dentro do respectivo agrupamento, as dependências, com 
 </details>
 
 ## :floppy_disk: Como Instalar
-Para que após a clonagem este módulo funcione de forma correta, serão necessárias algumas ações para que toda a estrutura fique adequada para o seu bom funcionamento. Antes de listar os passos necessários para o preparo do ambiente, é necessário que o computador onde irá rodar este módulo, já tenha instalado o <a href="https://git-scm.com/"target="_blank">Git</a>, <a href="https://nodejs.org/en/"target="_blank">Node.JS >=v12.14.0 LTS</a> e o <a href="https://yarnpkg.com/"target="_blank">Yarn >=v1.22.4</a>.
+Para que após a clonagem este módulo funcione de forma correta, serão necessárias algumas ações para que toda a estrutura fique adequada para o seu bom funcionamento. Antes de listar os passos necessários para o preparo do ambiente, é necessário que o computador onde irá rodar este módulo, já tenha instalado o [Git](https://git-scm.com/), [Node.JS >=v12.14.0 LTS](https://nodejs.org/en/) e o [Yarn >=v1.22.4](https://yarnpkg.com/).
 Com essa estrutura pronta, pode-se iniciar o preparo do ambiente para se rodar este módulo Back-end do sistema FastFeet.
+
+1º Clonar este respoitório
+Para se efetuar a clonagem desse repositório, crie uma pasta onde for o local adequado no seu computador, abra uma sessão do terminal de dentro dessa pasta e execute o seguinte comando
+```
+# Clona a pasta back-end do sistema FastFeet
+$ git clone https://github.com/SDamasceno-Dev/gostack-fastfeet-back_end
+```
+
+Em seguida acessa a pasta clonada
+```
+# Acessa a pasta clonada
+$ cd gostack-fastfeet-back_end
+```
+
+Agora execute o Yarn para que todas as dependências sejam corretamente instaladas
+```
+# Instala todas as dependências necessárias
+$ yarn
+```
+
 
 <details><summary>Instalação dos Banco de Dados</summary>
 	<p>
   <ul>
     <li>
-      É necessário que sejam instalados 2 bancos de dados o postgres e o redis. Nas páginas desses bancos possuem toda a orientação de como proceder a instalação deles;
+      É necessário que sejam instalados 2 bancos de dados o <a href="https://www.postgresql.org/" target="_blank">Postgres</a> e o <a href="https://redis.io/" target="_blank">Redis</a>.  Nas páginas desses bancos possuem toda a orientação de como proceder a instalação deles;
     </li>
     <li>
-
+      Com a instalação feita, será encessários fazer alguns ajustes nos arquivos de configuração conforme
     </li>
     <li></li>
     <li></li>
@@ -77,7 +97,5 @@ Com essa estrutura pronta, pode-se iniciar o preparo do ambiente para se rodar e
     <li></li>
     <li></li>
   </ul>
-
-
 	</p>
 </details>
