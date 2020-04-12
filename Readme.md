@@ -83,7 +83,7 @@ Agora execute o Yarn para que todas as dependências sejam corretamente instalad
 $ yarn
 ```
 
-<details><summary><span style="font-weight: bold">Instalação dos Banco de Dados</span></summary>
+<details><summary style="font-weight: bold">Instalação dos Banco de Dados</summary>
   <p>
   Uma vez que todas as dependências estejam instaladas, chegou o momento de preparar o ambiente de banco de dados. Vamos ver o que é necessário para isso:
   <ul>
