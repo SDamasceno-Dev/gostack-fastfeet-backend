@@ -81,21 +81,54 @@ $ yarn
 
 <details><summary>Instalação dos Banco de Dados</summary>
 	<p>
+  Uma vez que todas as dependências estejam instaladas, chegou o momento de preparar o ambiente de banco de dados. Vamos ver o que é necessário para isso:
   <ul>
     <li>
       É necessário que sejam instalados 2 bancos de dados o <a href="https://www.postgresql.org/" target="_blank">Postgres</a> e o <a href="https://redis.io/" target="_blank">Redis</a>.  Nas páginas desses bancos possuem toda a orientação de como proceder a instalação deles;
     </li>
     <li>
-      Com a instalação feita, será encessários fazer alguns ajustes nos arquivos de configuração conforme
+      Com a instalação desses bancos feita, serão necessários fazer alguns ajustes nos arquivos de configuração conforme a sua realidade. No arquivo localizado em <span style="font-weight: bold; text-decoration:underline; color: #B14913">src/config/database.js</span> você poderá configurar a sua conexão com o postgres. O sistema todo foi configurado para utilizar a porta 5432;
     </li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>
+      Após a instalação e configuração da conexão com o Postgres, pode-se efetuar a migração das tabelas desse banco. Para isso iremos utilizar o <span style="font-weight: bold; text-decoration:italic; color: #607541">sequelize-cli</span>, executando o seguinte comando:
+
+  ```
+  # Executa a migração criando as tabelas no banco de dados Postgres
+  $ yarn sequelize db:migrate
+  ```
+  <li>
+      Após a criação de todas as tabelas necessárias para o sistema executar de maneira correta, você tem a opção de criar um usuário administrador padrão. Para isso, iremos utilizar novamente o <span style="font-weight: bold; text-decoration:italic; color: #607541">sequelize-cli</span> executando o seguinte comando:
+
+  ```
+  # Cria o usuário padrão com perfil de administrador no sistema FastFeet
+  $ yarn sequelize db:seed:all
+  ```
+
+  Este usuário possui os seguintes dados:
+
+  ```
+  name: 'Distribuidora FastFeet'
+  email: 'admin@fastfeet.com'
+  password: '123456'
+  ```
+  </li>
+  <li>
+    Com todas as tabela criadas e o usuário padrão com perfil administrador configurado, já é possível seguir iniciar os serviços do Back-end. Para isso, basta executar os seguintes comandos, sendo que é necessário que cada comando seja executado em uma instância diferente do terminal:
+
+  ```
+  # Comando para rodar os serviços do Postgres no Back-end do Sistema FastFeet
+  $ yarn dev
+  ```
+
+  Com uma outra instância do terminal aberta, execute agora o seguinte comando:
+
+  ```
+  # Comando para rodar os serviços do Redis no Back-end do Sistema FastFeet
+  $ yarn queue
+  ```
+  </li>
+    <li>Com essa etapa realizada com sucesso, já é possível seguir para o próximo passo.</li>
+</li>
   </ul>
 	</p>
 </details>
