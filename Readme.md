@@ -10,13 +10,14 @@
 </p>
 
 <p align="center" target="_blank">
-:link:| &nbsp;<a href="#page_with_curl-Descrição" target="_blank">Descrição </a> &nbsp;  | &nbsp; <a href="#books-Bibliotecas" target="_blank">Bibliotecas </a> &nbsp; | &nbsp; <a href="#file_folder-Módulos" target="_blank">Como instalar </a> &nbsp; | &nbsp; <a href="#file_folder-Módulos" target="_blank">Como usar </a> &nbsp; | &nbsp; <a href="#file_folder-Módulos" target="_blank">Licença </a> &nbsp; |</p>
+:link:| &nbsp;<a href="#page_with_curl-Descrição" target="_blank">Descrição </a> &nbsp;  | &nbsp; <a href="#books-Bibliotecas">Bibliotecas </a> &nbsp; | &nbsp; <a href="#floppy_disk-Como-Instalar">Como instalar </a> &nbsp; | &nbsp; <a href="#office-Estrutura-do-Back-End">Como usar </a> &nbsp; | &nbsp; <a href="https://github.com/SDamasceno-Dev/gostack-fastfeet-back_end/blob/master/LICENSE.MD" target="_blank">Licença </a> &nbsp; |</p>
 
 ## :page_with_curl: Descrição
 
 O módulo Back-end do sistema FastFeet é o responsável por executar, por meio de uma **API** (**Application Programming Interface** ou traduzindo para o português **Interface de Programação de Aplicativos**) toda a pesquisa de coleta e envio de informações com os bancos de dados necessários para o sistema. Na seção **Bibliotecas** estarão listadas todas as dependências utilizada no desenvolvimento deste módulo.
 
 ## :books: Bibliotecas
+
 Abaixo estão listadas, dentro do respectivo agrupamento, as dependências, com a sua respectiva versão, utilizadas para o desenvolvimento desse módulo Back-end do sistema Fastfeet:
 
 <details><summary>Dependências</summary>
@@ -56,28 +57,31 @@ Abaixo estão listadas, dentro do respectivo agrupamento, as dependências, com 
 </details>
 
 ## :floppy_disk: Como Instalar
+
 Para que após a clonagem este módulo funcione de forma correta, serão necessárias algumas ações para que toda a estrutura fique adequada para o seu bom funcionamento. Antes de listar os passos necessários para o preparo do ambiente, é necessário que o computador onde irá rodar este módulo, já tenha instalado o [Git](https://git-scm.com/), [Node.JS >=v12.14.0 LTS](https://nodejs.org/en/) e o [Yarn >=v1.22.4](https://yarnpkg.com/).
 Com essa estrutura pronta, pode-se iniciar o preparo do ambiente para se rodar este módulo Back-end do sistema FastFeet.
 
 1º Clonar este respoitório
 Para se efetuar a clonagem desse repositório, crie uma pasta onde for o local adequado no seu computador, abra uma sessão do terminal de dentro dessa pasta e execute o seguinte comando
-```
+
+```bash
 # Clona a pasta back-end do sistema FastFeet
 $ git clone https://github.com/SDamasceno-Dev/gostack-fastfeet-back_end
 ```
 
 Em seguida acessa a pasta clonada
-```
+
+```bash
 # Acessa a pasta clonada
 $ cd gostack-fastfeet-back_end
 ```
 
 Agora execute o Yarn para que todas as dependências sejam corretamente instaladas
-```
+
+```bash
 # Instala todas as dependências necessárias
 $ yarn
 ```
-
 
 <details><summary><span style="font-weight: bold">Instalação dos Banco de Dados</span></summary>
   <p>
@@ -96,6 +100,7 @@ $ yarn
   # Executa a migração criando as tabelas no banco de dados Postgres
   $ yarn sequelize db:migrate
   ```
+
   <li>
   Após a criação de todas as tabelas necessárias para o sistema executar de maneira correta, você tem a opção de criar um usuário administrador padrão. Para isso, iremos utilizar novamente o <span style="font-weight: bold; text-decoration:italic; color: #607541">sequelize-cli</span> executando o seguinte comando:
 
@@ -111,6 +116,7 @@ $ yarn
   email: 'admin@fastfeet.com'
   password: '123456'
   ```
+
   </li>
   <li>
   Com todas as tabela criadas e o usuário padrão com perfil administrador configurado, já é possível seguir iniciar os serviços do Back-end. Para isso, basta executar os seguintes comandos, sendo que é necessário que cada comando seja executado em uma instância diferente do terminal:
@@ -126,6 +132,7 @@ $ yarn
   # Comando para rodar os serviços do Redis no Back-end do Sistema FastFeet
   $ yarn queue
   ```
+
   </li>
   <li>Com essa etapa realizada com sucesso, já é possível seguir para o próximo passo.</li>
   </li>
@@ -134,6 +141,7 @@ $ yarn
 </details>
 
 ## :office: Estrutura do Back-End
+
 Com o intuito de tornar esse módulo mais didático, serão aqui citadas algumas das estruturas mais importantes desse módulo e a sua principal função. Caso seja necessário, pode verificar diretamente nos arquivos em cada uma das estruturas para poder compreender mais a fundo.
 
 <ul>
