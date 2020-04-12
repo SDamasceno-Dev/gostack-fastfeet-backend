@@ -79,25 +79,25 @@ $ yarn
 ```
 
 
-<details><summary>Instalação dos Banco de Dados</summary>
-	<p>
+<details><summary><span style="font-weight: bold">Instalação dos Banco de Dados</span></summary>
+  <p>
   Uma vez que todas as dependências estejam instaladas, chegou o momento de preparar o ambiente de banco de dados. Vamos ver o que é necessário para isso:
   <ul>
-    <li>
-      É necessário que sejam instalados 2 bancos de dados o <a href="https://www.postgresql.org/" target="_blank">Postgres</a> e o <a href="https://redis.io/" target="_blank">Redis</a>.  Nas páginas desses bancos possuem toda a orientação de como proceder a instalação deles;
-    </li>
-    <li>
-      Com a instalação desses bancos feita, serão necessários fazer alguns ajustes nos arquivos de configuração conforme a sua realidade. No arquivo localizado em <span style="font-weight: bold; text-decoration:underline; color: #B14913">src/config/database.js</span> você poderá configurar a sua conexão com o postgres. O sistema todo foi configurado para utilizar a porta 5432;
-    </li>
-    <li>
-      Após a instalação e configuração da conexão com o Postgres, pode-se efetuar a migração das tabelas desse banco. Para isso iremos utilizar o <span style="font-weight: bold; text-decoration:italic; color: #607541">sequelize-cli</span>, executando o seguinte comando:
+  <li>
+  É necessário que sejam instalados 2 bancos de dados o <a href="https://www.postgresql.org/" target="_blank">Postgres</a> e o <a href="https://redis.io/" target="_blank">Redis</a>.  Nas páginas desses bancos possuem toda a orientação de como proceder a instalação deles;
+  </li>
+  <li>
+  Com a instalação desses bancos feita, serão necessários fazer alguns ajustes nos arquivos de configuração conforme a sua realidade. No arquivo localizado em <span style="font-weight: bold; text-decoration:underline; color: #B14913">src/config/database.js</span> você poderá configurar a sua conexão com o postgres. O sistema todo foi configurado para utilizar a porta 5432;
+  </li>
+  <li>
+  Após a instalação e configuração da conexão com o Postgres, pode-se efetuar a migração das tabelas desse banco. Para isso iremos utilizar o <span style="font-weight: bold; text-decoration:italic; color: #607541">sequelize-cli</span>, executando o seguinte comando:
 
   ```
   # Executa a migração criando as tabelas no banco de dados Postgres
   $ yarn sequelize db:migrate
   ```
   <li>
-      Após a criação de todas as tabelas necessárias para o sistema executar de maneira correta, você tem a opção de criar um usuário administrador padrão. Para isso, iremos utilizar novamente o <span style="font-weight: bold; text-decoration:italic; color: #607541">sequelize-cli</span> executando o seguinte comando:
+  Após a criação de todas as tabelas necessárias para o sistema executar de maneira correta, você tem a opção de criar um usuário administrador padrão. Para isso, iremos utilizar novamente o <span style="font-weight: bold; text-decoration:italic; color: #607541">sequelize-cli</span> executando o seguinte comando:
 
   ```
   # Cria o usuário padrão com perfil de administrador no sistema FastFeet
@@ -113,7 +113,7 @@ $ yarn
   ```
   </li>
   <li>
-    Com todas as tabela criadas e o usuário padrão com perfil administrador configurado, já é possível seguir iniciar os serviços do Back-end. Para isso, basta executar os seguintes comandos, sendo que é necessário que cada comando seja executado em uma instância diferente do terminal:
+  Com todas as tabela criadas e o usuário padrão com perfil administrador configurado, já é possível seguir iniciar os serviços do Back-end. Para isso, basta executar os seguintes comandos, sendo que é necessário que cada comando seja executado em uma instância diferente do terminal:
 
   ```
   # Comando para rodar os serviços do Postgres no Back-end do Sistema FastFeet
@@ -127,8 +127,28 @@ $ yarn
   $ yarn queue
   ```
   </li>
-    <li>Com essa etapa realizada com sucesso, já é possível seguir para o próximo passo.</li>
-</li>
+  <li>Com essa etapa realizada com sucesso, já é possível seguir para o próximo passo.</li>
+  </li>
   </ul>
-	</p>
+  </p>
 </details>
+
+## :office: Estrutura do Back-End
+Com o intuito de tornar esse módulo mais didático, serão aqui citadas algumas das estruturas mais importantes desse módulo e a sua principal função. Caso seja necessário, pode verificar diretamente nos arquivos em cada uma das estruturas para poder compreender mais a fundo.
+
+<ul>
+<li>
+  <span style="font-weight: bold; text-decoration: underline">Controllers</span> (/src/app/controllers)
+  <p>
+  Nessa pasta estão localizados todos os controllers do Sistema FastFeet. Esses controllers definem as regras de negócio para cada uma das entidades que fazem parte do sistema (Administrador, Entregador, Encomenda, Cliente). Estas regras de negócio englobam desde a definição e horários para que as entregas possam ser retiradas para serem entregues até a necessidade de se coletar a assinatura da entrega para se finalizar a mesma.
+  </p>
+</li>
+<li>
+  <span style="font-weight: bold; text-decoration: underline">Models</span> (/src/app/models)
+  <p>
+  Aqui estão armazenados todos os arquivos modelos das entidades do sistema FastFeet
+  </p>
+</li>
+<li></li>
+<li></li>
+</ul>
