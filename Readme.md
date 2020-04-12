@@ -146,12 +146,14 @@ Com o intuito de tornar esse módulo mais didático, serão aqui citadas algumas
 <li>
 
   **Models** (/src/app/models)
-  Aqui estão armazenados todos os arquivos modelos das entidades do sistema FastFeet
-  </p>
+  Aqui estão armazenados todos os arquivos modelos das entidades do sistema FastFeet que são utilizados junto com o sequelize no momento de iteração dessas entidades com o sistema.
 </li>
-<li></li>
-<li></li>
+<li>
+
+  **Config** (/src/config)
+  Aqui estão armazenados todos os arquivos de configuração do sistema FastFeet. É necessário uma atenção maior na hora de manipular esses arquivos, pois uma má configuração pode comprometer por completo a boa experiência no uso do sistema.
+</li>
 </ul>
 
 ---
-Criado e editado por Sandro de Oliveira Damasceno  [github!](https://github.com/SDamasceno-Dev) :octocat:
+Criado e editado por **Sandro de Oliveira Damasceno** :space_invader:   [github!](https://github.com/SDamasceno-Dev) :octocat:
