@@ -66,14 +66,14 @@ Para se efetuar a clonagem desse repositório, crie uma pasta onde for o local a
 
 ```bash
 # Clona a pasta back-end do sistema FastFeet
-$ git clone https://github.com/SDamasceno-Dev/gostack-fastfeet-back_end
+$ git clone https://github.com/SDamasceno-Dev/gostack-fastfeet-backend
 ```
 
 Em seguida acessa a pasta clonada
 
 ```bash
-# Acessa a pasta clonada
-$ cd gostack-fastfeet-back_end
+# Acessar a pasta clonada
+$ cd gostack-fastfeet-backend
 ```
 
 Agora execute o Yarn para que todas as dependências sejam corretamente instaladas
