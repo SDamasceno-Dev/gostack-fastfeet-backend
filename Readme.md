@@ -10,7 +10,7 @@
 </p>
 
 <p align="center" target="_blank">
-:link:| &nbsp;<a href="#page_with_curl-Descrição" target="_blank">Descrição</a> &nbsp;  | &nbsp; <a href="#books-Bibliotecas">Bibliotecas</a> &nbsp; | &nbsp; <a href="#floppy_disk-Como-Instalar">Como instalar</a> &nbsp; | &nbsp; <a href="#office-Estrutura-do-Back-End">Estrutura do Back-End</a> &nbsp; | &nbsp; <a href="https://github.com/SDamasceno-Dev/gostack-fastfeet-back_end/blob/master/LICENSE.MD" target="_blank">Licença </a> &nbsp; |</p>
+:link:| &nbsp;<a href="#page_with_curl-Descrição" target="_blank">Descrição</a> &nbsp;  | &nbsp; <a href="#books-Bibliotecas">Bibliotecas</a> &nbsp; | &nbsp; <a href="#floppy_disk-Como-Instalar">Como instalar</a> &nbsp; | &nbsp; <a href="#office-Estrutura-do-Back-End">Estrutura do Back-End</a> &nbsp; | &nbsp; <a href="https://github.com/SDamasceno-Dev/gostack-fastfeet-back_end/blob/master/LICENSE.MD">Licença </a> &nbsp; |</p>
 
 ## :page_with_curl: Descrição
 
@@ -140,6 +140,8 @@ $ yarn
   </ul>
   </p>
 </details>
+
+Após todas as etapas realizadas com sucesso, já pode realizar a instalação do módulo <a href="https://github.com/SDamasceno-Dev/gostasck-fastfeet-frontend" target="_blank">Front-end (WEB)</a> do Sistema FastFeet.
 
 ## :office: Estrutura do Back-End
 
