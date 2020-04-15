@@ -77,18 +77,17 @@ class DeliveryProblemController {
 
   // Register a delivery Problem
   async store(req, res) {
-    const { courier_id, description } = req.query;
-    const delivery_id = req.params.deliveryid;
-
     const schema = Yup.object().shape({
       description: Yup.string().required()
     });
     // Validate the data informed to this action
-    if (!(await schema.isValid(req.query))) {
+    if (!(await schema.isValid(req.body))) {
       return res.status(400).json({
         error: 'To inform a problem, you must enter the description.'
       });
     }
+    const { courier_id, description } = req.body;
+    const delivery_id = req.params.deliveryid;
 
     // Verify delivery existence
     const delivery = await Delivery.findByPk(delivery_id);
