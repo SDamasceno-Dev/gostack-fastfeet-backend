@@ -23,6 +23,7 @@ class DeliveryProblemController {
     const deliveriesProblems = await DeliveryProblem.findAll({
       // Config search
       where: {},
+      order: [['id', 'DESC']],
       limit: 7,
       offset: (page - 1) * 20
     });
