@@ -26,6 +26,9 @@ class DeliveriesListController {
         end_date: {
           // Based on params, list a different results.
           [Op[delivered === 'true' ? 'ne' : 'eq']]: null
+        },
+        canceled_at: {
+          [Op.eq]: null
         }
       },
       attributes: ['id', 'product', 'created_at', 'start_date', 'end_date'],
