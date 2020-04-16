@@ -20,7 +20,7 @@ O módulo Backend do Sistema FastFeet é o responsável por executar, por meio d
 
 ## :books: Bibliotecas
 
-Abaixo estão listadas, dentro do respectivo agrupamento conforme usabilidade, as dependências, com a sua respectiva versão, utilizadas para o desenvolvimento desse módulo Backend do Sistema Fastfeet:
+Abaixo estão listadas as dependências com suas respectivas versões utilizadas para o desenvolvimento desse módulo Backend do Sistema Fastfeet, agrupadas conforme usabilidade:
 
 <details><summary>Dependências</summary>
   <p>
@@ -60,46 +60,53 @@ Abaixo estão listadas, dentro do respectivo agrupamento conforme usabilidade, a
 
 ## :floppy_disk: Como Instalar
 
-Para que este módulo funcione de forma correta após a clonagem, serão necessárias alguns recursos para que toda a estrutura fique adequada para o seu bom funcionamento. Antes de listar os passos necessários para o preparo do ambiente, é necessário que o computador onde irá rodar este módulo, já tenha instalado o [Git](https://git-scm.com/), [Node.JS >=v12.14.0 LTS](https://nodejs.org/en/) e o [Yarn >=v1.22.4](https://yarnpkg.com/). Todos esses pacotes podem ser instalados utilizando um **Gerenciador de pacotes** compatível com o seu sistema operacional ([Homebrew](https://brew.sh/) para macOS, [Chocolatey](https://chocolatey.org/) para Windows).
-Com essa estrutura pronta, pode-se iniciar o preparo do ambiente para se rodar este módulo Backend do Sistema FastFeet.
+Para que este módulo funcione de forma correta após a clonagem, serão necessários alguns recursos para que toda a estrutura fique adequada para o seu bom funcionamento.
 
-**1º Clonar este respoitório**
+Antes de preparar o ambiente, é necessário que o computador, onde irá rodar este módulo, já tenha instalado o [Git](https://git-scm.com/), [Node.JS >=v12.14.0 LTS](https://nodejs.org/en/) e o [Yarn >=v1.22.4](https://yarnpkg.com/).
 
-Para se efetuar a clonagem desse repositório, crie uma pasta onde ficará toda a estrutura do sistema no computador onde irá executar, abra uma sessão do terminal de dentro dessa pasta e execute o seguinte comando
+Todos esses pacotes podem ser instalados utilizando um **Gerenciador de pacotes** compatível com o seu sistema operacional ([Homebrew](https://brew.sh/) para macOS, [Chocolatey](https://chocolatey.org/) para Windows).
+Feito isto, o preparo do ambiente suegue os seguintes passos:
+
+**1º Clonar este repositório**
+
+Para se efetuar a clonagem desse repositório:
+* 1- Crie uma pasta onde ficará toda a estrutura do sistema;
+* 2- No computador onde irá executar, acesse a pasta criada e inicie uma sessão do terminal de comandos do seu sistema operacional, e execute o seguinte comando:
 
 ```bash
 # Clonar a pasta Backend do Sistema FastFeet
 $ git clone https://github.com/SDamasceno-Dev/gostack-fastfeet-backend
 ```
 
-Em seguida acessa a pasta clonada
+* 3- Acesse a pasta clonada
 
 ```bash
 # Acessar a pasta clonada
 $ cd gostack-fastfeet-backend
 ```
 
-Agora execute o Yarn para que todas as dependências sejam corretamente instaladas
+* 4- Executar o Yarn para que todas as dependências sejam corretamente instaladas
 
 ```bash
-# Instala todas as dependências necessárias
+# Instalar todas as dependências necessárias
 $ yarn
 ```
 
 **2º Banco de Dados**
 
-Uma vez que todas as dependências estejam instaladas, chegou o momento de preparar o ambiente de banco de dados. Vamos ver o que é necessário para isso:
+Uma vez que todas as dependências estejam instaladas, chegou o momento de preparar o ambiente de banco de dados. Para isso devemos:
 
-* É necessário que sejam instalados 2 bancos de dados o [Postgres](https://www.postgresql.org/) e o [Redis](https://redis.io/).  Nas páginas desses bancos possuem toda a orientação de como proceder a instalação deles;
-* Com a instalação desses bancos feita, serão necessários fazer alguns ajustes nos arquivos de configuração conforme a sua realidade. No arquivo localizado em **src/config/database.js** você poderá configurar a sua conexão com o Postgres;
-* Após a instalação e configuração da conexão com o Postgres, pode-se efetuar a migração das tabelas nesse banco. Para isso iremos utilizar o **sequelize-cli**, executando o seguinte comando:
+* 1- Instalar o banco de dados **Postgres**. Ver orientações em como proceder a instalação clicando [aqui](https://www.postgresql.org/);
+* 2- Instalar o banco de dado **Redis**. Ver orientações em como proceder a instalação clicando [aqui](https://redis.io/);
+* 3- Efetuar os ajustes necessários, no arquivo **database.js** localizado em **src/config/**, para que seja feita a conexão com o Postgres;
+* 4- Efetuar a migração das tabelas para o Postgres. Para isso iremos utilizar o **sequelize-cli**, executando o seguinte comando:
 
   ```bash
   # Executa a migração criando as tabelas no banco de dados Postgres
   $ yarn sequelize db:migrate
   ```
 
-* Após a criação de todas as tabelas necessárias para o sistema executar de maneira correta, você tem a opção de criar um usuário administrador padrão. Para isso, iremos utilizar novamente o **sequelize-cli** executando o seguinte comando:
+* 5- (opcional) Criar um usuário administrador padrão. Para isso, iremos utilizar novamente o **sequelize-cli** executando o seguinte comando:
 
   ```bash
   # Cria o usuário padrão com perfil de administrador no Sistema FastFeet
@@ -113,9 +120,11 @@ Uma vez que todas as dependências estejam instaladas, chegou o momento de prepa
   email: 'admin@fastfeet.com'
   password: '123456'
   ```
-* Com todas as tabela criadas e o usuário padrão com perfil administrador configurado, já é possível seguir iniciar os serviços do Backend. Para isso, basta executar os seguintes comandos, sendo que é necessário que cada comando seja executado em uma instância diferente do terminal:
+
+* Com todas as tabelas criadas e o usuário padrão com perfil administrador configurado, já é possível iniciar os serviços do Backend. Para isso, basta executar no terminal os comandos abaixo, sendo que os mesmos devem ser executados em instâncias diferentes do terminal:
 
   ```bash
+  # Instância 1
   # Comando para rodar os serviços do Postgres no Backend do Sistema FastFeet
   $ yarn dev
   ```
@@ -123,20 +132,21 @@ Uma vez que todas as dependências estejam instaladas, chegou o momento de prepa
   Com uma outra instância do terminal aberta, execute agora o seguinte comando:
 
   ```bash
+  # Instância 1
   # Comando para rodar os serviços do Redis no Backend do Sistema FastFeet
   $ yarn queue
   ```
 
-Após todas as etapas realizadas com sucesso, já pode realizar a instalação do módulo [Front-end (WEB)](https://github.com/SDamasceno-Dev/gostasck-fastfeet-frontend) do Sistema FastFeet.
+Após todas as etapas realizadas com sucesso, prosseguimos com a instalação do módulo [Front-end (WEB)](https://github.com/SDamasceno-Dev/gostasck-fastfeet-frontend) do Sistema FastFeet.
 
 ## :office: Estrutura do Backend
 
-Com o intuito de tornar esse módulo mais didático, serão aqui citadas algumas das estruturas mais importantes desse módulo e a sua principal função. Caso seja necessário, você pode verificar diretamente nos arquivos em cada uma das estruturas para poder compreender de forma mais aprofundada.
+Com o intuito de tornar esse módulo mais didático, serão aqui citadas algumas das estruturas mais importantes desse módulo e a sua principal função. Caso seja necessária uma compreensão mais aprofundada, você pode verificar diretamente nos arquivos em cada uma das estruturas.
 
 * **Controllers**  (/src/app/controllers)
- Nessa pasta estão localizados todos os controllers do Sistema FastFeet. Esses controllers definem as regras de negócio para cada uma das entidades que fazem parte do sistema (Administrador, Entregador, Encomenda, Cliente). Estas regras de negócio englobam desde a definição e horários para que as entregas possam ser retiradas para serem entregues até a necessidade de se coletar a assinatura da entrega para se finalizar a mesma.
+ Nessa pasta estão localizados todos os controllers do Sistema FastFeet. Esses controllers definem as regras de negócio para cada uma das entidades que fazem parte do sistema (Administrador, Entregador, Encomenda, Cliente). Estas regras de negócio englobam desde a definição e horários para que as encomendas possam ser retiradas para serem entregues até a necessidade de se coletar a assinatura da entrega paraa finalização do processo.
 * **Models** (/src/app/models)
-Aqui estão armazenados todos os arquivos modelos das entidades do Sistema FastFeet que são utilizados junto com o sequelize no momento de iteração dessas entidades com o sistema.
+Aqui estão armazenados todos os arquivos modelos das entidades do Sistema FastFeet que são utilizados junto com o sequelize no momento de interação dessas entidades com o sistema.
 * **Config** (/src/config)
 Aqui estão armazenados todos os arquivos de configuração do Sistema FastFeet. É necessário uma atenção maior na hora de manipular esses arquivos, pois uma má configuração pode comprometer por completo a boa experiência no uso do sistema.
 
