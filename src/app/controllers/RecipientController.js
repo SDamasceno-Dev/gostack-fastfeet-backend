@@ -69,7 +69,7 @@ class RecipController {
       number: Yup.string(),
       complement: Yup.string(),
       city: Yup.string(),
-      state: Yup.string().max(2),
+      state: Yup.string(),
       zipcode: Yup.string()
     });
 

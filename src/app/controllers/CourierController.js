@@ -119,7 +119,7 @@ class CourierController {
       ]
     });
     return res.json({
-      courier: response.rows,
+      courierList: response.rows,
       courierCount: response.count
     });
   }
