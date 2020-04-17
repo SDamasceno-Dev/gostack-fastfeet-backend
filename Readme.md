@@ -65,7 +65,7 @@ Para que este módulo funcione de forma correta após a clonagem, serão necess�
 Antes de preparar o ambiente, é necessário que o computador, onde irá rodar este módulo, já tenha instalado o [Git](https://git-scm.com/), [Node.JS >=v12.14.0 LTS](https://nodejs.org/en/) e o [Yarn >=v1.22.4](https://yarnpkg.com/).
 
 Todos esses pacotes podem ser instalados utilizando um **Gerenciador de pacotes** compatível com o seu sistema operacional ([Homebrew](https://brew.sh/) para macOS, [Chocolatey](https://chocolatey.org/) para Windows).
-Feito isto, o preparo do ambiente suegue os seguintes passos:
+Feito isto, o preparo do ambiente segue os seguintes passos:
 
 **1º Clonar este repositório**
 
@@ -85,7 +85,7 @@ $ git clone https://github.com/SDamasceno-Dev/gostack-fastfeet-backend
 $ cd gostack-fastfeet-backend
 ```
 
-* 4- Executar o Yarn para que todas as dependências sejam corretamente instaladas
+* 4- Execute o Yarn para que todas as dependências sejam corretamente instaladas
 
 ```bash
 # Instalar todas as dependências necessárias
