@@ -43,7 +43,7 @@ class RecipController {
     const { page = 1 } = req.query;
     const { q = null } = req.query;
 
-    const deliveryListQuery = await Recipient.findAll({
+    const response = await Recipient.findAndCountAll({
       // Config search
       limit: 7,
       offset: (page - 1) * 7,
@@ -54,7 +54,10 @@ class RecipController {
         }
       }
     });
-    return res.json(deliveryListQuery);
+    return res.json({
+      recipientList: response.rows,
+      recipientCount: response.count
+    });
   }
 
   // Update a Recipient

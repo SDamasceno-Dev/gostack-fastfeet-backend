@@ -88,16 +88,16 @@ class DeliveryController {
     }
 
     // Search with query parameter defined
-    const deliveryList = await Delivery.findAll({
+    const response = await Delivery.findAndCountAll({
       // Config search
-      limit: 7,
-      offset: (page - 1) * 7,
-      order: [['id', 'DESC']],
       where: {
         product: {
           [Op.iLike]: `%${q || ''}%`
         }
       },
+      order: [['id', 'DESC']],
+      limit: 7,
+      offset: (page - 1) * 7,
       // Include recipient data in the search result
       include: [
         {
@@ -133,7 +133,10 @@ class DeliveryController {
         }
       ]
     });
-    return res.json(deliveryList);
+    return res.json({
+      deliveryList: response.rows,
+      deliveryCount: response.count
+    });
   }
 
   // Delete a Delivery from the database

@@ -100,7 +100,7 @@ class CourierController {
     const { page = 1 } = req.query;
     const { q = null } = req.query;
 
-    const courier = await Courier.findAll({
+    const response = await Courier.findAndCountAll({
       // Config search
       limit: 7,
       offset: (page - 1) * 7,
@@ -118,7 +118,10 @@ class CourierController {
         }
       ]
     });
-    return res.json(courier);
+    return res.json({
+      courier: response.rows,
+      courierCount: response.count
+    });
   }
 
   // Delete a Courier (Delete)

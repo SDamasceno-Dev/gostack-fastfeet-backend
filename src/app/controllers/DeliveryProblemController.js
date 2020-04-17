@@ -20,21 +20,25 @@ class DeliveryProblemController {
   // Distributor List all Deliveries with a Problem
   async show(req, res) {
     const { page = 1 } = req.query;
-    const deliveriesProblems = await DeliveryProblem.findAll({
+    const response = await DeliveryProblem.findAndCountAll({
       // Config search
       where: {},
       order: [['id', 'DESC']],
       limit: 7,
-      offset: (page - 1) * 20
+      offset: (page - 1) * 7
     });
-    return res.json(deliveriesProblems);
+    return res.json({
+      deliveriesProbList: response.rows,
+      deliveriesProbCount: response.count
+    });
   }
 
   // Distributor list all Problems of a Delivery
   async index(req, res) {
     const { page = 1 } = req.query;
     const delivery_id = req.params.deliveryid;
-    const delivery = await DeliveryProblem.findAll({
+
+    const response = await DeliveryProblem.findAndCountAll({
       // Config search
       where: {
         delivery_id
@@ -73,7 +77,10 @@ class DeliveryProblemController {
         }
       ]
     });
-    return res.json({ delivery });
+    return res.json({
+      deliveryProblemsList: response.rows,
+      deliveryProblemsCount: response.count
+    });
   }
 
   // Register a delivery Problem
