@@ -12,7 +12,7 @@
 </p>
 
 <p align="center" target="_blank">
-:link:| &nbsp;<a href="#page_with_curl-Descrição" target="_blank">Descrição</a> &nbsp;  | &nbsp; <a href="#books-Bibliotecas">Bibliotecas</a> &nbsp; | &nbsp; <a href="#floppy_disk-Como-Instalar">Como instalar</a> &nbsp; | &nbsp; <a href="#office-Estrutura-do-Backend">Estrutura do Backend</a> &nbsp; | &nbsp; <a href="https://github.com/SDamasceno-Dev/gostack-fastfeet-back_end/blob/master/LICENSE.MD">Licença </a> &nbsp; |</p>
+:link:| &nbsp;<a href="#page_with_curl-Descrição" target="_blank">Descrição</a> &nbsp;  | &nbsp; <a href="#books-Bibliotecas">Bibliotecas</a> &nbsp; | &nbsp; <a href="#shell-ambiente-de-desenvolvimento-teste-e-uso">Ambiente de teste e uso</a> &nbsp; | &nbsp; <a href="#floppy_disk-Como-Instalar">Como instalar</a> &nbsp; | &nbsp; <a href="#office-Estrutura-do-Backend">Estrutura do Backend</a> &nbsp; | &nbsp; <a href="https://github.com/SDamasceno-Dev/gostack-fastfeet-back_end/blob/master/LICENSE.MD">Licença </a> &nbsp; |</p>
 
 ## :page_with_curl: Descrição
 
@@ -57,6 +57,15 @@ Abaixo estão listadas as dependências com suas respectivas versões utilizadas
     </ul>
   </p>
 </details>
+
+# :shell: Ambiente de desenvolvimento, teste e uso
+
+Este módulo foi desenvolvido utilizando
+
+```bash
+Visual Studio Code
+Version: 1.44.0
+```
 
 ## :floppy_disk: Como Instalar
 
