@@ -70,8 +70,8 @@ Feito isto, o preparo do ambiente segue os seguintes passos:
 **1º Clonar este repositório**
 
 Para se efetuar a clonagem desse repositório:
-* 1- Crie uma pasta onde ficará toda a estrutura do sistema;
-* 2- No computador onde irá executar, acesse a pasta criada e inicie uma sessão do terminal de comandos do seu sistema operacional, e execute o seguinte comando:
+* 1- No computador onde serão instalados os módulos do Sistema Fastfeet, crie uma pasta onde ficará toda a estrutura do sistema;
+* 2- Acesse a pasta criada e inicie uma sessão no Terminal de comandos, do seu sistema operacional, e execute o seguinte comando:
 
 ```bash
 # Clonar a pasta Backend do Sistema FastFeet
@@ -96,9 +96,9 @@ $ yarn
 
 Uma vez que todas as dependências estejam instaladas, chegou o momento de preparar o ambiente de banco de dados. Para isso devemos:
 
-* 1- Instalar o banco de dados **Postgres**. Ver orientações em como proceder a instalação clicando [aqui](https://www.postgresql.org/);
+* 1- Instalar o banco de dados **Postgres** com o nome de **fastfeet**. Ver orientações em como proceder a instalação clicando [aqui](https://www.postgresql.org/);
 * 2- Instalar o banco de dado **Redis**. Ver orientações em como proceder a instalação clicando [aqui](https://redis.io/);
-* 3- Efetuar os ajustes necessários, no arquivo **database.js** localizado em **src/config/**, para que seja feita a conexão com o Postgres;
+* 3- Efetuar os ajustes necessários, no arquivo **database.js** localizado em **src/config/**, para que seja feita a conexão com o Postgres conforme as informações da sua instalação desse banco;
 * 4- Efetuar a migração das tabelas para o Postgres. Para isso iremos utilizar o **sequelize-cli**, executando o seguinte comando:
 
   ```bash
@@ -137,7 +137,7 @@ Uma vez que todas as dependências estejam instaladas, chegou o momento de prepa
   $ yarn queue
   ```
 
-Após todas as etapas realizadas com sucesso, prosseguimos com a instalação do módulo [Front-end (WEB)](https://github.com/SDamasceno-Dev/gostasck-fastfeet-frontend) do Sistema FastFeet.
+Após todas as etapas realizadas com sucesso, prosseguimos com a instalação do módulo [Frontend (WEB)](https://github.com/SDamasceno-Dev/gostasck-fastfeet-frontend) do Sistema FastFeet.
 
 ## :office: Estrutura do Backend
 
